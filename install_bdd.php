@@ -1,15 +1,14 @@
 <?php // Creation de la base de donnees 
 
-  function query($link,$requete)
-  { 
-    $resultat=mysqli_query($link,$requete) or die("$requete : ".mysqli_error($link));
-	return($resultat);
-  }
-
+	function query($link,$requete)
+	{ 
+		$resultat=mysqli_query($link,$requete) or die("$requete : ".mysqli_error($link));
+		return($resultat);
+	}
   
-$mysqli=mysqli_connect('127.0.0.1', 'root', '') or die("Erreur de connexion");
-$base="Regions";
-$Sql="
+	$mysqli=mysqli_connect('127.0.0.1', 'root', '') or die("Erreur de connexion");
+	$base="Boissons";
+	$Sql="
 		DROP DATABASE IF EXISTS $base;
 		CREATE DATABASE $base;
 		USE $base;
@@ -79,9 +78,9 @@ $Sql="
             PRIMARY KEY(id_aliment, id_sous_cat),
             FOREIGN KEY(id_aliment) REFERENCES aliment(id_aliment),
             FOREIGN KEY(id_sous_cat) REFERENCES sous_categorie(id_sous_cat)
-         );";
+         )";
 
-foreach(explode(';',$Sql) as $Requete) query($mysqli,$Requete);
+	foreach(explode(';',$Sql) as $Requete) query($mysqli,$Requete);
 
-mysqli_close($mysqli);
+	mysqli_close($mysqli);	
 ?>
