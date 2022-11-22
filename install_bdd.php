@@ -80,6 +80,7 @@ $Sql="
             FOREIGN KEY(id_aliment) REFERENCES aliment(id_aliment),
             FOREIGN KEY(id_sous_cat) REFERENCES sous_categorie(id_sous_cat)
          );";
+         
 
 foreach(explode(';',$Sql) as $Requete) query($mysqli,$Requete);
 
