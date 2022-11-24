@@ -41,9 +41,9 @@
          );
          
          CREATE TABLE super_categorie(
-            id_cat INT NOT NULL AUTO_INCREMENT,
-            nom_cat VARCHAR(50),
-            PRIMARY KEY(id_cat)
+            id_super_cat INT NOT NULL AUTO_INCREMENT,
+            nom_super_cat VARCHAR(50),
+            PRIMARY KEY(id_super_cat)
          );
          
          CREATE TABLE sous_categorie(
@@ -68,12 +68,12 @@
             FOREIGN KEY(id_aliment) REFERENCES aliment(id_aliment)
          );
          
-         CREATE TABLE cat_par(
+         CREATE TABLE super_cat_par(
             id_aliment INT,
-            id_cat INT,
-            PRIMARY KEY(id_aliment, id_cat),
+            id_super_cat INT,
+            PRIMARY KEY(id_aliment, id_super_cat),
             FOREIGN KEY(id_aliment) REFERENCES aliment(id_aliment),
-            FOREIGN KEY(id_cat) REFERENCES super_categorie(id_cat)
+            FOREIGN KEY(id_super_cat) REFERENCES super_categorie(id_super_cat)
          );
          
          CREATE TABLE sous_cat_par(
@@ -87,31 +87,31 @@
       //On remplit la base de donnée
 		$aliment_deja_vu = Array();
 
-		//On parcours chaque données du tableau Hierarchie
+		//On parcout chaque aliment
 		foreach($Hierarchie as $Aliment => $Categories){
-         //On parcout chaque aliment
-         array_push($aliment_deja_vu, $Aliment);
-        
-         //On parcourt chaque sous-cat
-         //todo : vérifier si ça existe
+         //On parcourt chaque sous-cat après avoir vérifier qu'il existe
          if(array_key_exists("sous-categorie", $Categories)){
             foreach($Categories['sous-categorie'] as $sous_cat){
-               //$nom_sous_cat = str_replace("'","\'",$sous_cat);
-               //echo $nom_sous_cat."<br>";
+               //On écrit la requête
                $requet = sprintf("INSERT INTO `sous_categorie` (`nom_sous_cat`) VALUES('%s'",mysqli_real_escape_string($mysqli,$sous_cat));
                $requet = $requet.");";
-               echo $requet."<br>";
+               //echo $requet."<br>";
                $Sql = $Sql.$requet;
             }
          }
       
+         //On parcourt chaque sueper-cat après avoir vérifier qu'il existe
+         if(array_key_exists("super-categorie", $Categories)){
+            foreach($Categories['super-categorie'] as $super_cat){
+               //On écrit la requête
+               $requet = sprintf("INSERT INTO `super_categorie` (`nom_super_cat`) VALUES('%s'",mysqli_real_escape_string($mysqli,$sous_cat));
+               $requet = $requet.");";
+               //echo $requet."<br>";
+               $Sql = $Sql.$requet;
+            }
+         }
 
-         //todo : vérifier si ça existe
-         /*foreach($Categories['super-categorie'] as $super_cat){
-            
-         }*/
-
-         //todo : insérer aliment
+      
 
 		}
 		
