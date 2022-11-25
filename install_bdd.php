@@ -28,7 +28,7 @@
          
          CREATE TABLE recette(
             id_recette INT NOT NULL AUTO_INCREMENT,
-            nom VARCHAR(50),
+            nom VARCHAR(200),
             ingredients VARCHAR(500),
             preparation VARCHAR(500),
             PRIMARY KEY(id_recette)
@@ -145,6 +145,17 @@
          mysqli_real_escape_string($mysqli,$ingredients_recette),
          mysqli_real_escape_string($mysqli,$preparation_recette));
          $Sql = $Sql.$requet;
+
+         //On associe les aliments à la recette
+         if(array_key_exists("index", $liste_recettes)){
+            foreach($liste_recettes['index'] as $liste_aliments){
+               //On écrit la requête pour associer l'aliment à la sous_cat
+               $requet = sprintf("INSERT INTO `contient`(`id_recette`, `id_aliment`) VALUES ((SELECT id_recette FROM recette WHERE nom LIKE '%s' LIMIT 1),(SELECT id_aliment FROM aliment WHERE nom LIKE '%s' LIMIT 1));",
+               mysqli_real_escape_string($mysqli,$titre_recette),mysqli_real_escape_string($mysqli,$liste_aliments));
+               //echo $requet."<br>";
+               $Sql = $Sql.$requet;
+            }
+         }
       }
 		
    //Ici je supprime le dernier ;
