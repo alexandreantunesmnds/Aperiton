@@ -84,18 +84,24 @@
             FOREIGN KEY(id_sous_cat) REFERENCES sous_categorie(id_sous_cat)
          );";
 
-      //On remplit la base de donnée
-		$aliment_deja_vu = Array();
-
 		//On parcout chaque aliment
 		foreach($Hierarchie as $Aliment => $Categories){
+         //On écrit la requête pour l'aliment qu'on parcourt
+         $requet = sprintf("INSERT INTO `aliment` (`nom`) VALUES('%s');",mysqli_real_escape_string($mysqli,$Aliment));
+         //echo $requet."<br>";
+         $Sql = $Sql.$requet;
+
          //On parcourt chaque sous-cat après avoir vérifier qu'il existe
          if(array_key_exists("sous-categorie", $Categories)){
             foreach($Categories['sous-categorie'] as $sous_cat){
-               //On écrit la requête
-               $requet = sprintf("INSERT INTO `sous_categorie` (`nom_sous_cat`) VALUES('%s'",mysqli_real_escape_string($mysqli,$sous_cat));
-               $requet = $requet.");";
+               //On écrit la requête pour ajouter la sous_cat
+               $requet = sprintf("INSERT INTO `sous_categorie` (`nom_sous_cat`) VALUES('%s');",mysqli_real_escape_string($mysqli,$sous_cat));
                //echo $requet."<br>";
+               $Sql = $Sql.$requet;
+
+               //On écrit la requête pour associer l'aliment à la sous_cat
+               $requet = sprintf("INSERT INTO `sous_cat_par`(`id_aliment`, `id_sous_cat`) VALUES ((SELECT id_aliment FROM aliment WHERE nom LIKE '%s' LIMIT 1),(SELECT id_sous_cat FROM sous_categorie WHERE nom_sous_cat LIKE '%s' LIMIT 1));",
+               mysqli_real_escape_string($mysqli,$Aliment),mysqli_real_escape_string($mysqli,$sous_cat));
                $Sql = $Sql.$requet;
             }
          }
@@ -103,17 +109,43 @@
          //On parcourt chaque sueper-cat après avoir vérifier qu'il existe
          if(array_key_exists("super-categorie", $Categories)){
             foreach($Categories['super-categorie'] as $super_cat){
-               //On écrit la requête
-               $requet = sprintf("INSERT INTO `super_categorie` (`nom_super_cat`) VALUES('%s'",mysqli_real_escape_string($mysqli,$sous_cat));
-               $requet = $requet.");";
+               //On écrit la requête pour ajouter la super_cat
+               $requet = sprintf("INSERT INTO `super_categorie` (`nom_super_cat`) VALUES('%s');",mysqli_real_escape_string($mysqli,$super_cat));
                //echo $requet."<br>";
+               $Sql = $Sql.$requet;
+
+               //On écrit la requête pour associer l'aliment à la sous_cat
+               $requet = sprintf("INSERT INTO `super_cat_par`(`id_aliment`, `id_super_cat`) VALUES ((SELECT id_aliment FROM aliment WHERE nom LIKE '%s' LIMIT 1),(SELECT id_super_cat FROM super_categorie WHERE nom_super_cat LIKE '%s' LIMIT 1));",
+               mysqli_real_escape_string($mysqli,$Aliment),mysqli_real_escape_string($mysqli,$super_cat));
                $Sql = $Sql.$requet;
             }
          }
-
-      
-
 		}
+
+      //On parcourt chaque recette
+      foreach($Recettes as $id_recette => $liste_recettes){
+         if(array_key_exists("titre", $liste_recettes)){
+            //echo $liste_recettes["titre"]."<br>";
+            $titre_recette = $liste_recettes["titre"];
+         }
+         if(array_key_exists("ingredients", $liste_recettes)){
+            //echo $liste_recettes["ingredients"]."<br>";
+            $ingredients_recette = $liste_recettes["ingredients"];
+            $ingredients_recette = str_replace(";",",",$ingredients_recette);
+         }
+         if(array_key_exists("preparation", $liste_recettes)){
+            //echo $liste_recettes["preparation"]."<br>";
+            $preparation_recette = $liste_recettes["preparation"];
+            $preparation_recette = str_replace(";",",",$preparation_recette);
+         }
+
+         //On écrit la requête
+         $requet = sprintf("INSERT INTO `recette` (`nom`,`ingredients`,`preparation`) VALUES('%s','%s','%s');",
+         mysqli_real_escape_string($mysqli,$titre_recette),
+         mysqli_real_escape_string($mysqli,$ingredients_recette),
+         mysqli_real_escape_string($mysqli,$preparation_recette));
+         $Sql = $Sql.$requet;
+      }
 		
    //Ici je supprime le dernier ;
 	$Sql = substr($Sql,0,-1);	
