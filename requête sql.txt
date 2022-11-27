@@ -1,0 +1,8 @@
+//Affiche les aliments ayant la sous-catégorie Epice commune
+SELECT nom FROM `aliment`a,`sous_cat_par`scp,`sous_categorie`sc WHERE a.id_aliment = scp.id_aliment AND sc.id_sous_cat = scp.id_sous_cat AND sc.nom_sous_cat LIKE'Epice commune';
+
+//Remplit la table sous_cat_par avec le nom de l'aliment et le nom de la sous_categorie
+INSERT INTO `sous_cat_par`(`id_aliment`, `id_sous_cat`) VALUES ((SELECT id_aliment FROM aliment WHERE nom LIKE 'Boisson gazeuse non alcoolisée'),(SELECT id_sous_cat FROM sous_categorie WHERE nom_sous_cat LIKE 'Coca-cola'))
+
+//Affiche les noms de recette contenant l'aliment malibu
+SELECT r.nom FROM `recette`r, `aliment`a, `contient`c WHERE r.id_recette = c.id_recette AND a.id_aliment = c.id_aliment AND a.nom LIKE 'Malibu'
