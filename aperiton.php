@@ -5,7 +5,7 @@
         <title>Aperiton - Page d'accueil</title>
 	    <meta charset="utf-8" />
         <!-- Importation du fichier style css -->
-        <link rel="stylesheet" href="style.css" media="screen" type="text/css" />
+        <link rel="stylesheet" href="outils/style.css" media="screen" type="text/css" />
 </head>
 
 <body>

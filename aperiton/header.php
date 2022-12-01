@@ -1,7 +1,7 @@
 <?php session_start();?>
 <header>
     <!-- Importation du fichier style css -->
-    <link rel="stylesheet" href="../style.css" media="screen" type="text/css" />
+    <link rel="stylesheet" href="../outils/style.css" media="screen" type="text/css" />
 
     <div id="top"> 
         <div id="top_left">
