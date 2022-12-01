@@ -1,0 +1,163 @@
+html{
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    background: white;
+}
+
+header{
+    margin: 0 auto;
+    text-align: center;
+    color: #F58549; /* Mango Tango */
+    /*background: #FAF0CA; /* Lemon Meringue */
+    justify-content: center;
+    align-items: center;
+}
+
+header #top{
+    border-bottom: solid #F58549;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+header #top_left{
+    display: inline-block;
+    vertical-align: top;
+    width: 20%;
+}
+
+header #top_center{
+    /*display: inline-block;*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+}
+
+header #top_right{
+    display: inline-block;
+    text-align: center;
+    vertical-align: top;
+    width: 30%;
+}
+
+header #top_right button{
+    background: #F58549;
+    color: white;
+    border: solid #F58549;
+    border-radius: 10px;
+    height: 30px;
+    width: 150px;
+}
+
+header #top_right button:hover{
+    background: white;
+    color: #F58549;
+    border: solid #F58549;
+    border-radius: 10px;
+}
+
+header nav{
+    height: 30px;
+    padding-top: 10px;
+    text-align: center;
+    vertical-align: top;
+    background: rgb(240, 240, 240);
+}
+
+header a{
+    color: #F58549; 
+}
+
+header nav a{
+    color: black;
+}
+
+div #body{
+    /*background: #FAF0CA; /* Lemon Meringue */
+    padding : 10px;
+    width: 100% auto;;
+}
+
+#recipe, #random_recipe{
+    border: 2px solid #F58549;
+    width: 80%;
+    border-radius: 10px;
+    margin-top : 1%;
+    margin-left : 10%;
+    margin-right : 10%;
+    align-content: center;
+    align-items: center;
+    display: inline-block;
+}
+
+.random_recipe{
+    background: #FAF0CA;
+    align-items: center;
+    display: inline-block;
+    border: 2px solid #F58549;
+    width: 30% ;
+    border-radius: 10px;
+    margin : 10px;
+    padding: 4px;
+    height : 400px;
+    font-size: 15px;
+    /*text-align: bottom;*/
+}
+
+.recipe{
+    margin-left:10%;
+    margin-right:10%;
+}
+
+a{
+    text-decoration : none;
+}
+
+footer{
+    background: rgb(240, 240, 240); /* Black Chocolate */
+}
+
+#body_connexion{
+    width:400px;
+    margin:0 auto;
+    margin-top:5%;
+    margin-bottom:5%;
+}
+
+form{
+    width:100%;
+    padding: 30px;
+    border: 1px solid #f1f1f1;
+    background: #fff;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+#body_connexion h1{
+    width: 38%;
+    margin: 0 auto;
+    padding-bottom: 10px;
+}
+
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+input[type=submit] {
+    background-color: #F58549;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+   input[type=submit]:hover {
+    background-color: white;
+    color: #3E8914;
+    border: 1px solid #3E8914;
+}
