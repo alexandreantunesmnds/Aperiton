@@ -1,5 +1,7 @@
 <?php // Creation de la base de donnees 
 
+include 'Donnees.inc.php';
+print_r($Recettes);
 	function query($link,$requete)
 	{ 
 		$resultat=mysqli_query($link,$requete) or die("$requete : ".mysqli_error($link));
@@ -80,9 +82,8 @@
             FOREIGN KEY(id_sous_cat) REFERENCES sous_categorie(id_sous_cat)
          );
 		 
-		INSERT INTO recette VALUES (0,'Alerte à Malibu','50 cl de malibu coco|50 cl de gloss cerise|1 l de jus de goyave blanche|1 poignée de griottes','Mélanger tous les ingrédients ensemble dans un grand pichet. Placer au frais au moins 3 heures avant de déguster. Tchin tchin !!');";
-		
-		
+		INSERT INTO recette VALUES (0,'Alerte à Malibu','50 cl de malibu coco|50 cl de gloss cerise|1 l de jus de goyave blanche|1 poignée de griottes','Mélanger tous les ingrédients ensemble dans un grand pichet. Placer au frais au moins 3 heures avant de déguster. Tchin tchin !!')";
+
 	foreach(explode(';',$Sql) as $Requete) query($mysqli,$Requete);
 
 	mysqli_close($mysqli);	
