@@ -10,7 +10,7 @@
 
 <body>
     <!-- L'entête -->
-    <?php include_once('header.php'); ?>
+    <?php include_once('aperiton/header.php'); ?>
 
     <!-- Le corps de page -->
     <div id="body" >
@@ -82,6 +82,6 @@
     </div>
 
     <!-- Le pied de page -->
-    <?php include_once('footer.php'); ?>
+    <?php include_once('aperiton/footer.php'); ?>
 </body>
 </html>
