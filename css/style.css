@@ -1,13 +1,13 @@
-html{
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
     font-family:Verdana, Geneva, Tahoma, sans-serif;
-    background: white;
 }
 
 header{
-    margin: 0 auto;
     text-align: center;
-    color: #F58549; /* Mango Tango */
-    /*background: #FAF0CA; /* Lemon Meringue */
+    color: #F58549;
     justify-content: center;
     align-items: center;
 }
@@ -26,7 +26,6 @@ header #top_left{
 }
 
 header #top_center{
-    /*display: inline-block;*/
     display: flex;
     justify-content: center;
     align-items: center;
@@ -73,7 +72,6 @@ header nav a{
 }
 
 div #body{
-    /*background: #FAF0CA; /* Lemon Meringue */
     padding : 10px;
     width: 100% auto;;
 }
@@ -85,6 +83,7 @@ div #body{
     margin-top : 1%;
     margin-left : 10%;
     margin-right : 10%;
+    margin-bottom: 10px;
     align-content: center;
     align-items: center;
     display: inline-block;
@@ -110,54 +109,19 @@ div #body{
 }
 
 a{
+    color: black;
     text-decoration : none;
 }
 
 footer{
-    background: rgb(240, 240, 240); /* Black Chocolate */
+    background: rgb(240, 240, 240);
 }
 
-#body_connexion{
-    width:400px;
-    margin:0 auto;
-    margin-top:5%;
-    margin-bottom:5%;
-}
-
-form{
-    width:100%;
-    padding: 30px;
-    border: 1px solid #f1f1f1;
-    background: #fff;
-    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
-}
-
-#body_connexion h1{
-    width: 38%;
-    margin: 0 auto;
-    padding-bottom: 10px;
-}
-
-input[type=text], input[type=password] {
+input[type=text]{
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;
     border: 1px solid #ccc;
     box-sizing: border-box;
-}
-
-input[type=submit] {
-    background-color: #F58549;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-}
-   input[type=submit]:hover {
-    background-color: white;
-    color: #3E8914;
-    border: 1px solid #3E8914;
 }

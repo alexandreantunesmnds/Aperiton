@@ -81,7 +81,6 @@
         </div>  
     </div>
 </body>
-
 <!-- Le pied de page -->
 <?php include_once('footer.php'); ?>
 

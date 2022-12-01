@@ -29,10 +29,10 @@
                     </button>
             <!-- Le cas où l'utilisateur est inconnu -->
             <?php else: ?>
-                    <button onclick="window.location.href = 'login.php';">
+                    <button onclick="window.location.href = 'register.php';">
                         Mes favoris
                     </button>   
-                    <button onclick="window.location.href = 'login.php';">
+                    <button onclick="window.location.href = 'register.php';">
                         Connexion
                     </button>
             <?php endif; ?>
@@ -41,6 +41,7 @@
     <!-- La barre de navigation -->
     <nav id="toolbar">
         <a href="page1.html">Toutes nos recettes</a>
+        <a href="page2.html">Les recettes par catégories</a>
         <a href="page2.html">Recette au hasard</a>
     </nav>
 </header>
