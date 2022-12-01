@@ -5,7 +5,7 @@
         <title>Aperiton - Page d'accueil</title>
 	    <meta charset="utf-8" />
         <!-- Importation du fichier style css -->
-        <link rel="stylesheet" href="outils/style.css" media="screen" type="text/css" />
+        <link rel="stylesheet" href="style.css" media="screen" type="text/css" />
 </head>
 
 <body>
@@ -37,19 +37,47 @@
                     $random_id_recipe_3 = rand(1,$count);
                 }
                 //echo "1: ".$random_id_recipe_1." 2: ".$random_id_recipe_2." 3: ".$random_id_recipe_3;
+            ?>
+            <!-- Affichage aléatoire de trois recettes --> 
+            <!-- Recette aléatoire 1 -->
+            <?php 
                 $requete = "SELECT nom, ingredients, preparation FROM recettes WHERE id_recette = $random_id_recipe_1";
                 $exec_requete = mysqli_query($mysqli,$requete);
                 $reponse = mysqli_fetch_array($exec_requete);
-                echo $reponse['nom']." : ".$reponse['ingredients']."<br>";
+            ?>
+            <a href="aperiton/recipe.php?nom">
+                <div class="random_recipe">
+                    <div id="recipe_title">
+                        <?php echo $reponse['nom']; ?>
+                    </div>
+                </div>
+            </a>
+            <!-- Recette aléatoire 2 -->
+            <?php
                 $requete = "SELECT nom, ingredients, preparation FROM recettes WHERE id_recette = $random_id_recipe_2";
                 $exec_requete = mysqli_query($mysqli,$requete);
                 $reponse = mysqli_fetch_array($exec_requete);
-                echo $reponse['nom']." : ".$reponse['ingredients']."<br>";
+            ?>
+            <a href="aperiton/recipe.php?nom">
+                <div class="random_recipe">
+                    <div id="recipe_title">
+                        <?php echo $reponse['nom']; ?>
+                    </div>
+                </div>
+            </a>
+            <!-- Recette aléatoire 1 -->
+            <?php
                 $requete = "SELECT nom, ingredients, preparation FROM recettes WHERE id_recette = $random_id_recipe_3";
                 $exec_requete = mysqli_query($mysqli,$requete);
                 $reponse = mysqli_fetch_array($exec_requete);
-                echo $reponse['nom']." : ".$reponse['ingredients']."<br>";
             ?>
+            <a href="aperiton/recipe.php?nom">
+                <div class="random_recipe">
+                    <div id="recipe_title">
+                        <?php echo $reponse['nom']; ?>
+                    </div>
+                </div>
+            </a>
         </div>  
     </div>
 
