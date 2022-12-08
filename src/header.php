@@ -66,7 +66,7 @@
     if(isset($_GET['search_recipe']) && !empty($_GET['search_recipe'])){
         if( mysqli_num_rows($all_recipe)  > 0){
             while($recipe = mysqli_fetch_array($all_recipe)){
-                echo $recipe['nom'];
+                echo $recipe['nom']."\n";
             }
         }else{
             echo "Aucune recette trouvé";
