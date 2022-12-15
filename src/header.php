@@ -16,28 +16,35 @@
     <!-- <link rel="stylesheet" href="../css/style.css" media="screen" type="text/css" /> -->
     <link rel="stylesheet" href="../css/header.css" media="screen" type="text/css" />
 
-    <div id="top"> 
-        <div id="top_left">
-            <!-- Barre de menu verticale-->
-            <nav class="navbarvert">
-                <div class="nav-liens">
-                    <ul>
-                        <li><a href="aperiton.php">Aperiton</a></li>
-                        <li><a href="aperiton.php">Aperiton</a></li>
-                        <li><a href="aperiton.php">Aperiton</a></li>
-                        <li><a href="aperiton.php">Aperiton</a></li>
-                    </ul>
-                </div>
-                <img src="img/Hamburger_icon.png" alt="menu verticale" class="menu-verticale">
-            </nav>
+    <div id="top">
+    <div id="top_left">
+    <nav>
+    <div class="navbar">
+        <div class="container nav-container">
+            <input class="checkbox" type="checkbox" name="" id="" />
+            <div class="hamburger-lines">
+              <span class="line line1"></span>
+              <span class="line line2"></span>
+              <span class="line line3"></span>
+            </div>  
+          <div class="menu-items">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">about</a></li>
+            <li><a href="#">blogs</a></li>
+            <li><a href="#">portfolio</a></li>
+            <li><a href="#">contact</a></li>
+          </div>
         </div>
+      </div>
+    </nav> 
+</div>
         <!-- Scripts -->
         <script>
             const menuVerticale = document.querySelector(".menu-verticale")
-            const navLiens = document.querySelector(".nav-liens")
-            
-            menuVerticale.addEventListener('click',()=>{
-                navLiens.classList.toggle('mobile-menu')
+            const hamburgerButton = document.querySelector(".hamburger-button")
+
+            hamburgerButton.addEventListener('click', () => {
+            navLiens.classList.toggle('mobile-menu')
             })
         </script>
 
@@ -85,6 +92,7 @@
         <a href="page2.html">Les recettes par catégories</a>
         <a href="page2.html">Recette au hasard</a>
     </nav>
+
 </header>
 
 <body> <!-- A transférer dans une autre page -->
