@@ -18,13 +18,17 @@
 		USE $base;
 		CREATE TABLE utilisateur(
             id_utilisateur INT NOT NULL AUTO_INCREMENT,
-            nom VARCHAR(50) NOT NULL,
-            prenom VARCHAR(50) NOT NULL,
+            sexe VARCHAR(50),
+            nom VARCHAR(50),
+            prenom VARCHAR(50),
             pseudo VARCHAR(50) NOT NULL,
             mot_de_passe VARCHAR(50) NOT NULL,
             adresse_mail VARCHAR(50),
             adresse_postale VARCHAR(50),
+            code_pos VARCHAR(50),
+            ville VARCHAR(50),
             num_tel VARCHAR(50),
+            date_naiss DATE,
             PRIMARY KEY(id_utilisateur)
          );
          

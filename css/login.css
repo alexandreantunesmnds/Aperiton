@@ -16,7 +16,7 @@
 }
 
 .container {
-	height: 600px;
+	height: 700px;
 	width: 500px;
 	background-color: white;
 	box-shadow: 8px 8px 20px rgb(128, 128, 128);
@@ -63,11 +63,11 @@
 }
 
 .form-section {
-	height: 500px;
-	width: 1000px;
+	height: 400px;
+	width: 800px;
 	padding: 20px 0;
 	display: flex;
-	position: relative;
+	position: absolute;
 	transition: all 0.5s ease-in-out;
 	left: 0px;
 }
@@ -94,11 +94,13 @@
 .signup-box {
 	gap: 10px;
 }
+.sex-box{
+	padding-top: 100px;
+}
 
 .ele {
-	height: 60px;
+	height: 20px;
 	width: 400px;
-	outline: none;
 	border: none;
 	color: rgb(77, 77, 77);
 	background-color: rgb(240, 240, 240);
