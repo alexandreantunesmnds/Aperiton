@@ -38,15 +38,6 @@
       </div>
     </nav> 
 </div>
-        <!-- Scripts -->
-        <script>
-            const menuVerticale = document.querySelector(".menu-verticale")
-            const hamburgerButton = document.querySelector(".hamburger-button")
-
-            hamburgerButton.addEventListener('click', () => {
-            navLiens.classList.toggle('mobile-menu')
-            })
-        </script>
 
         <!-- Barre de recherche -->
         <div id="top_center">
