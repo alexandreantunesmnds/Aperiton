@@ -13,18 +13,44 @@
 ?>
 <header>
     <!-- Importation du fichier style css -->
-    <link rel="stylesheet" href="../css/style.css" media="screen" type="text/css" />
+    <!-- <link rel="stylesheet" href="../css/style.css" media="screen" type="text/css" /> -->
+    <link rel="stylesheet" href="../css/header.css" media="screen" type="text/css" />
 
     <div id="top"> 
         <div id="top_left">
-            <a href="aperiton.php"><h2>Aperiton</h2></a>
+            <!-- Barre de menu verticale-->
+            <nav class="navbarvert">
+                <div class="nav-liens">
+                    <ul>
+                        <li><a href="aperiton.php">Aperiton</a></li>
+                        <li><a href="aperiton.php">Aperiton</a></li>
+                        <li><a href="aperiton.php">Aperiton</a></li>
+                        <li><a href="aperiton.php">Aperiton</a></li>
+                    </ul>
+                </div>
+                <img src="img/Hamburger_icon.png" alt="menu verticale" class="menu-verticale">
+            </nav>
         </div>
+        <!-- Scripts -->
+        <script>
+            const menuVerticale = document.querySelector(".menu-verticale")
+            const navLiens = document.querySelector(".nav-liens")
+            
+            menuVerticale.addEventListener('click',()=>{
+                navLiens.classList.toggle('mobile-menu')
+            })
+        </script>
+
+        <!-- Barre de recherche -->
         <div id="top_center">
+            <a href="aperiton.php"><h2>Aperiton</h2></a>
             <form method="GET">
-                <input type="search" placeholder="Rechercher une recette" name="search_recipe" autocomplete="off">
+                <!-- onRealeasKey="" -->
+                <input type="search" placeholder="Rechercher une recette" name="search_recipe" >
                 <input type="submit" name="Rechercher">
             </form>
             </div>
+        <!-- Bouton de connexion et de direction vers la page favoris -->
         <div id="top_right">
             <!-- Le cas où l'utilisateur est connu -->
             <?php if(isset($_SESSION['username'])): ?>
@@ -53,7 +79,7 @@
             <?php endif; ?>
         </div>
     </div>
-    <!-- La barre de navigation -->
+    <!-- La barre de navigation horizontale -->
     <nav id="toolbar">
         <a href="page1.html">Toutes nos recettes</a>
         <a href="page2.html">Les recettes par catégories</a>
