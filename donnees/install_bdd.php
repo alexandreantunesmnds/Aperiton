@@ -7,6 +7,7 @@
 		$resultat=mysqli_query($link,$requete) or die("$requete : ".mysqli_error($link));
 		return($resultat);
 	}
+   
   
    //On se connecte à la base de donnée
 	$mysqli=mysqli_connect('127.0.0.1', 'root', '') or die("Erreur de connexion");
@@ -37,6 +38,7 @@
             nom VARCHAR(200),
             ingredients VARCHAR(500),
             preparation VARCHAR(500),
+            photo VARCHAR(255) NULL,
             PRIMARY KEY(id_recette)
          );
          
@@ -127,7 +129,6 @@
             }
          }
 		}
-
       //On parcourt chaque recette
       foreach($Recettes as $id_recette => $liste_recettes){
          if(array_key_exists("titre", $liste_recettes)){
@@ -144,13 +145,41 @@
             $preparation_recette = $liste_recettes["preparation"];
             $preparation_recette = str_replace(";",",",$preparation_recette);
          }
-
          //On écrit la requête
          $requet = sprintf("INSERT INTO `recettes` (`nom`,`ingredients`,`preparation`) VALUES('%s','%s','%s');",
          mysqli_real_escape_string($mysqli,$titre_recette),
          mysqli_real_escape_string($mysqli,$ingredients_recette),
          mysqli_real_escape_string($mysqli,$preparation_recette));
          $Sql = $Sql.$requet;
+      }
+
+         	// Ajout des images à la table des recettes
+		$tab[] = array ("image" => "Photos/Black_velvet.jpg", "nom" => "Black velvet");
+		$tab[] = array ("image" => "Photos/Bloody_mary.jpg", "nom" => "Bloody Mary");
+		$tab[] = array ("image" => "Photos/Bora_bora.jpg", "nom" => "Bora bora");
+		$tab[] = array ("image" => "Photos/Builder.jpg", "nom" => "Builder");
+		$tab[] = array ("image" => "Photos/Caipirinha.jpg", "nom" => "Caïpirinha");
+		$tab[] = array ("image" => "Photos/Coconut_kiss.jpg", "nom" => "Coconut kiss");
+		$tab[] = array ("image" => "Photos/Cuba_libre.jpg", "nom" => "Cuba libre");
+		$tab[] = array ("image" => "Photos/Frosty_lime.jpg", "nom" => "Frosty lime");
+		$tab[] = array ("image" => "Photos/Le_vandetta.jpg", "nom" => "Le vandetta");
+		$tab[] = array ("image" => "Photos/Margarita.jpg", "nom" => "Margarita");
+		$tab[] = array ("image" => "Photos/Mojito.jpg", "nom" => "Mojito");
+		$tab[] = array ("image" => "Photos/Pina_colada.jpg", "nom" => "Piña Colada");
+		$tab[] = array ("image" => "Photos/Raifortissimo.jpg", "nom" => "Raifortissimo");
+      $tab[] = array ("image" => "Photos/Sangria_sans_alcool.jpg", "nom" => "Sangria sans alcool");
+		$tab[] = array ("image" => "Photos/Screwdriver.jpg", "nom" => "Screwdriver");
+		$tab[] = array ("image" => "Photos/Shoot_up.jpg", "nom" => "Shoot up");
+		$tab[] = array ("image" => "Photos/Tequila_sunrise.jpg", "nom" => "Tequila sunrise");
+		$tab[] = array ("image" => "Photos/Tipunch.jpg", "nom" => "Ti'punch");
+			
+		for ($cmpt = 0; $cmpt< count($tab); $cmpt++){
+			$img = mysqli_real_escape_string($mysqli, $tab[$cmpt]['image']);
+			$nom = mysqli_real_escape_string($mysqli, $tab[$cmpt]['nom']);
+			//echo $img.' '.$nom;
+			$Sql .= "UPDATE recettes SET photo='{$img}' WHERE nom LIKE '{$nom}';  ";
+		}
+
 
          //On associe les aliments à la recette
          if(array_key_exists("index", $liste_recettes)){
@@ -162,7 +191,6 @@
                $Sql = $Sql.$requet;
             }
          }
-      }
 		
    //Ici je supprime le dernier ;
 	$Sql = substr($Sql,0,-1);	

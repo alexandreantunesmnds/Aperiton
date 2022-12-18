@@ -28,6 +28,8 @@ div #body{
     background: #FAF0CA;
     align-items: center;
     display: inline-block;
+    text-align: center;
+    vertical-align: middle;
     border: 2px solid #F58549;
     width: 30% ;
     border-radius: 10px;
@@ -35,7 +37,13 @@ div #body{
     padding: 4px;
     height : 400px;
     font-size: 15px;
+    overflow: hidden;
     /*text-align: bottom;*/
+}
+.random_recipe img {
+    display: block;
+    width: 60%;
+    margin: 0 auto;
 }
 
 .recipe{

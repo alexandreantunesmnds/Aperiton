@@ -18,7 +18,7 @@
 
             /* On recherche la recette dans la bdd */ 
             $mysqli=mysqli_connect('localhost', 'root', '','Boissons') or die("Erreur de connexion");
-            $requete = "SELECT ingredients, preparation FROM recettes WHERE nom = '$recipe_title'";
+            $requete = "SELECT ingredients, preparation,photo FROM recettes WHERE nom = '$recipe_title'";
             $exec_requete = mysqli_query($mysqli,$requete);
             $reponse = mysqli_fetch_array($exec_requete);
         }
@@ -33,7 +33,7 @@
                     <h1><?php echo $recipe_title; ?></h1>
                 </div>
                 <div id="recipe_photo">
-                    <!-- mettre photo ici -->
+                <img src="../<?php echo $reponse['photo']; ?>">
                 </div>
                 <div id="recipe_ingredients">
                     <hr>

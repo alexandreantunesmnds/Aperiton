@@ -41,7 +41,7 @@
             <!-- Affichage aléatoire de trois recettes --> 
             <!-- Recette aléatoire 1 -->
             <?php 
-                $requete = "SELECT nom, ingredients, preparation FROM recettes WHERE id_recette = $random_id_recipe_1";
+                $requete = "SELECT nom, ingredients, preparation,photo FROM recettes WHERE id_recette = $random_id_recipe_1";
                 $exec_requete = mysqli_query($mysqli,$requete);
                 $reponse = mysqli_fetch_array($exec_requete);
             ?>
@@ -50,11 +50,12 @@
                     <div id="recipe_title">
                         <?php echo $reponse['nom']; ?>
                     </div>
+                    <img src="../<?php echo $reponse['photo']; ?>">
                 </div>
             </a>
             <!-- Recette aléatoire 2 -->
             <?php
-                $requete = "SELECT nom, ingredients, preparation FROM recettes WHERE id_recette = $random_id_recipe_2";
+                $requete = "SELECT nom, ingredients, preparation,photo FROM recettes WHERE id_recette = $random_id_recipe_2";
                 $exec_requete = mysqli_query($mysqli,$requete);
                 $reponse = mysqli_fetch_array($exec_requete);
             ?>
@@ -63,11 +64,12 @@
                     <div id="recipe_title">
                         <?php echo $reponse['nom']; ?>
                     </div>
+                    <img src="../<?php echo $reponse['photo']; ?>">
                 </div>
             </a>
             <!-- Recette aléatoire 1 -->
             <?php
-                $requete = "SELECT nom, ingredients, preparation FROM recettes WHERE id_recette = $random_id_recipe_3";
+                $requete = "SELECT nom, ingredients, preparation,photo FROM recettes WHERE id_recette = $random_id_recipe_3";
                 $exec_requete = mysqli_query($mysqli,$requete);
                 $reponse = mysqli_fetch_array($exec_requete);
             ?>
@@ -76,6 +78,7 @@
                     <div id="recipe_title">
                         <?php echo $reponse['nom']; ?>
                     </div>
+                    <img src="../<?php echo $reponse['photo']; ?>">
                 </div>
             </a>
         </div>  
