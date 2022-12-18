@@ -31,11 +31,11 @@
 				<!-- login form -->
 				<form method="post">
 				<div class="login-box">
-				<input type="text" placeholder="Entrez le nom d'utilisateur" class="utilis ele"
+				<input type="text" placeholder="Pseudo" class="utilis ele"
 					name="username" required>
 					<input type="password"
 						class="password ele"
-						placeholder="Entrez le mot de passe" required>
+						placeholder="Mot de passe" required>
 					<button type="submit" name="btnLogin" class="clkbtn">C'est parti !</button>
 				</div>
 				</form>
@@ -55,28 +55,28 @@
 						<input type="text"
 							class="name ele"
 							name="nomtxt"
-							placeholder="Entrez votre nom">
+							placeholder="Nom">
 						<input type="text"
 						class="prenom ele"
 						name="prenomtxt"
-						placeholder="Entrez votre prénom">
+						placeholder="Prénom">
 						<input type="email"
 							class="email ele"
 							name="mailtxt"
-							placeholder="adressemail@email.com">
+							placeholder="E-mail">
 						<input type="text" name="ad_post" class="adress ele"
-							placeholder="Entrez votre adresse postale">
+							placeholder="Adresse postale">
 						<input type="text" name="cp_post"
 							class="adress ele"
-							placeholder="Entrez votre code postale">
+							placeholder="Code postale">
 						<input type="text" name="ville" class="adress ele"
-							placeholder="Entrez votre ville">
-						<input type="tel" id="phone" name="phone" class="tel ele" placeholder="0788023498">
-						<input type="text" name="logintxt"required="required" class="login ele" placeholder="Login">
+							placeholder="Ville">
+						<input type="tel" id="phone" name="phone" class="tel ele" placeholder="Numéro de téléphone">
+						<input type="text" name="logintxt"required="required" class="login ele" placeholder="Pseudo">
 						<input type="password"
 							class="password ele"
 							name="motdepassetxt"
-							placeholder="Entre ton mot de passe">
+							placeholder="Mot de passe">
 						<input type="password"
 							class="password ele"
 							placeholder="Confirmer le mot de passe">
