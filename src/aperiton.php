@@ -50,7 +50,9 @@
                     <div id="recipe_title">
                         <?php echo $reponse['nom']; ?>
                     </div>
+                    <?php if( $reponse['photo']!=NULL){?>
                     <img src="../<?php echo $reponse['photo']; ?>">
+                    <?php }?>
                 </div>
             </a>
             <!-- Recette aléatoire 2 -->
@@ -64,7 +66,9 @@
                     <div id="recipe_title">
                         <?php echo $reponse['nom']; ?>
                     </div>
+                    <?php if( $reponse['photo']!=NULL){?>
                     <img src="../<?php echo $reponse['photo']; ?>">
+                    <?php }?>
                 </div>
             </a>
             <!-- Recette aléatoire 1 -->
@@ -78,7 +82,9 @@
                     <div id="recipe_title">
                         <?php echo $reponse['nom']; ?>
                     </div>
+                    <?php if( $reponse['photo']!=NULL){?>
                     <img src="../<?php echo $reponse['photo']; ?>">
+                    <?php }?>
                 </div>
             </a>
         </div>  
