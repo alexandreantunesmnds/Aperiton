@@ -15,6 +15,9 @@
     <!-- Importation du fichier style css -->
     <!-- <link rel="stylesheet" href="../css/style.css" media="screen" type="text/css" /> -->
     <link rel="stylesheet" href="../css/header.css" media="screen" type="text/css" />
+    <link rel="stylesheet" href="path/to/font-awesome.css">
+
+    <script type="text/javascript" src="../outils/completion.js"></script>
 
     <div id="top">
     <div id="top_left">
@@ -41,13 +44,133 @@
 
         <!-- Barre de recherche -->
         <div id="top_center">
+        <div id="marque">
             <a href="aperiton.php"><h2>Aperiton</h2></a>
-            <form method="GET">
+        </div>
+            <form  autocomplete="off" method="GET">
+            <div class="autocomplete" style="width:300px;">
                 <!-- onRealeasKey="" -->
-                <input type="search" placeholder="Rechercher une recette" name="search_recipe" >
-                <input type="submit" name="Rechercher">
+                <input id="myInput" type="search" placeholder="Rechercher une recette" name="search_recipe" >
+                <button type="submit" class="search-button">
+                <svg width="24" height="24">
+                <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+                </svg>
+                </button>
+            </div>
             </form>
             </div>
+            <script>
+                var drinks = ["Alerte à Malibu",
+  "Aperol Spritz : Boisson italien pétillant",
+  "Aquarium",
+  "Black velvet",
+  "Bloody Mary",
+  "Bora bora",
+  "Builder",
+  "Caïpirinha",
+  "Champagne en Boisson",
+  "Citrouillette (Boisson au champagne)",
+  "Boisson Bacardi",
+  "Boisson Bacardi, grenadine, citron",
+  "Boisson Balalaïka",
+  "Boisson Cava Vodka Lemon",
+  "Boisson Champagne et saké",
+  "Boisson Eau de mer",
+  "Boisson Fraisalia (sans alcool)",
+  "Boisson Grand Paradis",
+  "Boisson Lion rouge",
+  "Boisson MAP",
+  "Boisson MTS",
+  "Boisson Madras",
+  "Boisson Mexicain à ma façon",
+  "Boisson Pomabricotine",
+  "Boisson Pomenas",
+  "Boisson Whisky Cranberries",
+  "Boisson anapomise",
+  "Boisson apéritif",
+  "Boisson apéritif aux framboises",
+  "Boisson au Martini",
+  "Boisson au cidre",
+  "Boisson au kumquat et au litchi",
+  "Boisson au limoncello",
+  "Boisson aux agrumes sans alcool",
+  "Boisson aux framboise",
+  "Boisson bulles de melon",
+  "Boisson café au lait",
+  "Boisson cardinal",
+  "Boisson champagne menthe citron vert",
+  "Boisson champanisé",
+  "Boisson citron-menthe (sans alcool)",
+  "Boisson coco",
+  "Boisson coco des amoureux",
+  "Boisson crème de coco et banane",
+  "Boisson de fruits",
+  "Boisson de fruits au citron vert",
+  "Boisson de jus de fruits pour les enfants",
+  "Boisson de pomme ambrée",
+  "Boisson des dimanches de neige",
+  "Boisson des îles Praslin",
+  "Boisson du verger",
+  "Boisson exotique au fruit de la passion",
+  "Boisson glacé tropical",
+  "Boisson italien prosecco",
+  "Boisson la variante (à base de rosé)",
+  "Boisson light fraîcheur à la pastèque",
+  "Boisson léger au martini",
+  "Boisson mexicanos",
+  "Boisson mousseux fraise citron vert (sans alcool)",
+  "Boisson noix de coco-café",
+  "Boisson pamplemousse menthe",
+  "Boisson paradise",
+  "Boisson pour les amoureux",
+  "Boisson rose au whisky",
+  "Boisson rose rosé pamplemousse",
+  "Boisson rose sucré",
+  "Boisson rouge",
+  "Boisson sans alcool Cranberry-orange",
+  "Boisson sans alcool KidiCana",
+  "Boisson sans alcool Sweet Melon",
+  "Boisson sans alcool Tropical Sunshine",
+  "Boisson tropical délicieux",
+  "Boisson white russian",
+  "Coconut kiss",
+  "Creole cream (Boisson)",
+  "Cuba libre",
+  "Frosty lime",
+  "Gin fizz facile",
+  "Ginger cosmo",
+  "Grand Marnier sour (Boisson)",
+  "Hulk ( Boisson )",
+  "Le baiser de la Schtroumpfette",
+  "Le vandetta",
+  "Margarita",
+  "Margarita à la fraise",
+  "Mojito",
+  "Mojito au Basilic",
+  "Mojito cubain",
+  "Negroni Boisson",
+  "Pink 3x6 (Boisson sans alcool)",
+  "Piña Colada",
+  "Piña Colada (Boisson)",
+  "Porto Flip",
+  "Punch-sangria de pastèque",
+  "Raifortissimo",
+  "Rainbow",
+  "Red Boisson",
+  "Rhum arrangé à la pomme",
+  "Rince-gouttes (Boisson)",
+  "Sangria sans alcool",
+  "Screwdriver",
+  "Shoot up",
+  "Shot piquant",
+  "Soupe au Champagne (Boisson)",
+  "Tequila sunrise",
+  "Ti'punch",
+  "Tutti Boisson",
+  "Virevoltage"];
+            autocomplete(document.getElementById("myInput"), drinks);
+            //autocomplete(document.getElementById("myInput"), ingredients);
+            </script> 
         <!-- Bouton de connexion et de direction vers la page favoris -->
         <div id="top_right">
             <!-- Le cas où l'utilisateur est connu -->
@@ -91,8 +214,7 @@
     if(isset($_GET['search_recipe']) && !empty($_GET['search_recipe'])){
         if( mysqli_num_rows($all_recipe)  > 0){
             while($recipe = mysqli_fetch_array($all_recipe)){
-                echo $recipe['nom']."\n";
-            }
+                echo '<a href="recette.php?nom=' . $recipe['nom'] . '">'.$recipe['nom'].'</a>';            }
         }else{
             echo "Aucune recette trouvé";
         }
