@@ -10,8 +10,7 @@
     <link rel="stylesheet" href="../css/login.css" media="screen" type="text/css" />
 </head>
 
-<!-- L'entête -->
-<?php include_once('header.php'); ?>
+
 
 <body>
 	<div id="body">
