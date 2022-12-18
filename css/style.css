@@ -56,9 +56,9 @@ a{
     text-decoration : none;
 }
 img {
-    width: 400px;
-    height: 300px;
-}
+    max-width: 100%;
+    max-height: 100%;
+  }
 
 hr{
     height: 3px;
