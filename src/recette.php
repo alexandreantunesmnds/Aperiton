@@ -47,6 +47,16 @@
                 </div>
             </div>
             <button id="favorite-button"><i class="fa fa-heart"></i> Favoris</button>
+            <?php
+            if (isset($_SESSION['user_id'])) {
+                // Récupérez l'ID de l'utilisateur de la variable de session
+                $user_id = $_SESSION['user_id'];
+                echo 'heyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy'.$user_id;
+              } else {
+                echo 'riennn';
+                // L'utilisateur n'est pas connecté, affichez un message d'erreur ou redirigez-le vers la page de connexion
+              }
+            ?>
         </div>
     </div>
 

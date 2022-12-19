@@ -47,12 +47,20 @@
 				$password = $_POST['password'];
 				// Connexion à la base de données
   				$mysqli = mysqli_connect('localhost', 'root', '', 'boissons');
+				$query = "SELECT id_utilisateur FROM utilisateur WHERE pseudo = '$username' AND mot_de_passe = '$password'";
+  				$result = mysqli_query($mysqli, $query);
+  				$row = mysqli_fetch_array($result);
+				  // Si l'utilisateur a été trouvé dans la base de données
+  				if ($row) {
+   				// Enregistrez l'ID de l'utilisateur dans une variable de session
+					// Démarrage de la session et enregistrement des informations de connexion dans la session
+					session_start();
+    				$_SESSION['user_id'] = $row['id_utilisateur'];
+ 				}
 				// Vérification des informations de connexion dans la base de données
 				$query = "SELECT * FROM utilisateur WHERE pseudo='$username' AND mot_de_passe='$password'";
 				$result = mysqli_query($mysqli, $query);
 				if (mysqli_num_rows($result) > 0) {
-					// Démarrage de la session et enregistrement des informations de connexion dans la session
-					session_start();
 					$_SESSION['username'] = true;
 				
 					// Redirection de l'utilisateur vers la page d'accueil
