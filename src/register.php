@@ -39,6 +39,15 @@
 					<button type="submit" name="btnLogin" class="clkbtn">C'est parti !</button>
 				</div>
 				</form>
+				<?php
+if (isset($_POST['btnLogin'])) {
+  // Check if the username and password are correct
+  // If they are, redirect the user to the homepage
+  header('Location: aperiton.php');
+  exit;
+}
+?>
+
 
 					<!-- signup form -->
 					<form method="post">
