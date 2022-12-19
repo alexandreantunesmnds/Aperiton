@@ -35,20 +35,35 @@
 					name="username" required>
 					<input type="password"
 						class="password ele"
-						placeholder="Mot de passe" required>
+						placeholder="Mot de passe" name="password" required>
 					<button type="submit" name="btnLogin" class="clkbtn">C'est parti !</button>
 				</div>
-				</form>
 				<?php
 				if (isset($_POST['btnLogin'])) {
 				// Check if the username and password are correct
 				// If they are, redirect the user to the homepage
-				session_start();
-				$_SESSION['username']=true;
-				header('Location: aperiton.php');
-				exit;
+				  // Récupération des valeurs du formulaire
+				$username = $_POST['username'];
+				$password = $_POST['password'];
+				// Connexion à la base de données
+  				$mysqli = mysqli_connect('localhost', 'root', '', 'boissons');
+				// Vérification des informations de connexion dans la base de données
+				$query = "SELECT * FROM utilisateur WHERE pseudo='$username' AND mot_de_passe='$password'";
+				$result = mysqli_query($mysqli, $query);
+				if (mysqli_num_rows($result) > 0) {
+					// Démarrage de la session et enregistrement des informations de connexion dans la session
+					session_start();
+					$_SESSION['username'] = true;
+				
+					// Redirection de l'utilisateur vers la page d'accueil
+					header('Location: aperiton.php');
+					exit;
+				  } else {
+					// Si les informations de connexion sont incorrectes, affichage d'un message d'erreur
+					echo '<p>Le nom d\'utilisateur est incorrect !</p>';				  }
 				}
 				?>
+				</form>
 
 
 					<!-- signup form -->
