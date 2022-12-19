@@ -78,3 +78,16 @@ input[type=text]{
     border: 1px solid #ccc;
     box-sizing: border-box;
 }
+
+#favorite-button {
+    /* définissez la couleur de fond souhaitée ici */
+    background-color: #F58549;
+    color: white;
+    /* ajoutez une bordure au bouton */
+    border: 1px solid black;
+    /* ajoutez un peu de marge pour améliorer l'apparence */
+    margin: 10px;
+    /* ajoutez un peu de padding pour améliorer l'apparence */
+    padding: 10px;
+  }
+  

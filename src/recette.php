@@ -10,7 +10,7 @@
 
 <!-- L'entête -->
 <?php include_once('header.php'); ?>
-
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
 <body>
     <?php 
         if(isset($_GET['nom'])){ 
@@ -46,6 +46,7 @@
                     <?php echo $reponse['preparation']; ?>
                 </div>
             </div>
+            <button id="favorite-button"><i class="fa fa-heart"></i> Favoris</button>
         </div>
     </div>
 
