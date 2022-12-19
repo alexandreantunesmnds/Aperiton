@@ -48,14 +48,20 @@
             </div>
             <button id="favorite-button"><i class="fa fa-heart"></i> Favoris</button>
             <?php
+            if(isset($_SESSION['username'])){
+            /* On recherche la recette dans la bdd */ 
+            $mysqli=mysqli_connect('localhost', 'root', '','boissons') or die("Erreur de connexion");
+            $requete = "SELECT id_recette, ingredients, preparation,photo FROM recettes WHERE nom = '$recipe_title'";
+            $exec_requete = mysqli_query($mysqli,$requete);
+            $reponse = mysqli_fetch_array($exec_requete);
+            $recipe_id = $reponse['id_recette']; // Récupérez l'ID de la recette
             if (isset($_SESSION['user_id'])) {
                 // Récupérez l'ID de l'utilisateur de la variable de session
                 $user_id = $_SESSION['user_id'];
-                echo 'heyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy'.$user_id;
               } else {
-                echo 'riennn';
                 // L'utilisateur n'est pas connecté, affichez un message d'erreur ou redirigez-le vers la page de connexion
               }
+            }
             ?>
         </div>
     </div>
