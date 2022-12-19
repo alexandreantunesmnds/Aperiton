@@ -65,7 +65,15 @@ hr{
     background-color: #F58549;
     border: none;
 }
+h1,h2,h3{
+    color: #F58549;
+    background-color: white;
+}
+#recipe_ingredients,#recipe_preparation{
+    background-color: #F58549;
+    color:white;
 
+}
 footer{
     background: rgb(240, 240, 240);
 }

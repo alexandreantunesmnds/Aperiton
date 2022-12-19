@@ -40,13 +40,15 @@
 				</div>
 				</form>
 				<?php
-if (isset($_POST['btnLogin'])) {
-  // Check if the username and password are correct
-  // If they are, redirect the user to the homepage
-  header('Location: aperiton.php');
-  exit;
-}
-?>
+				if (isset($_POST['btnLogin'])) {
+				// Check if the username and password are correct
+				// If they are, redirect the user to the homepage
+				session_start();
+				$_SESSION['username']=true;
+				header('Location: aperiton.php');
+				exit;
+				}
+				?>
 
 
 					<!-- signup form -->

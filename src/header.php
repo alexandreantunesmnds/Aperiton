@@ -10,6 +10,13 @@
         $requete = "SELECT nom, ingredients FROM recettes WHERE nom LIKE '%$recherche%' OR ingredients LIKE '%$recherche%' ORDER BY id_recette DESC";
         $all_recipe = mysqli_query($mysqli,$requete);
     }
+    if(isset($_GET['deconnexion'])){ 
+        if($_GET['deconnexion']==true){ 
+            session_unset();
+            session_destroy();
+            header('Location: aperiton.php');
+        }
+    }
 ?>
 <header>
     <!-- Importation du fichier style css -->
@@ -259,14 +266,6 @@
                     </button>   
                     <button onclick="window.location.href = 'aperiton.php?deconnexion=true';">
                         Deconnexion
-                        <?php 
-                            if(isset($_GET['deconnexion'])){ 
-                                if($_GET['deconnexion']==true){ 
-                                    session_unset();
-                                    header("location:aperiton.php");
-                                }
-                            }
-                        ?>
                     </button>
             <!-- Le cas où l'utilisateur est inconnu -->
             <?php else: ?>
