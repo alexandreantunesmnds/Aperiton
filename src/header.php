@@ -269,10 +269,10 @@
                     </button>
             <!-- Le cas où l'utilisateur est inconnu -->
             <?php else: ?>
-                    <button onclick="window.location.href = 'register.php';">
+                    <button onclick="window.location.href = 'connexion.php';">
                         Mes favoris
                     </button>   
-                    <button onclick="window.location.href = 'register.php';">
+                    <button onclick="window.location.href = 'connexion.php';">
                         Connexion
                     </button>
             <?php endif; ?>

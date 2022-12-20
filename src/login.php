@@ -1,41 +1,30 @@
-<!DOCTYPE html>
-<html>
+<?php
+    session_start();
+    if(isset($_POST['username']) && (isset($_POST['password']))){
+        //Connexion à la base de donées
+        $db = 'Boissons';
+        $mysqli=mysqli_connect('localhost', 'root', '',$db) or die("Erreur de connexion");
 
-<head>
-        <title>Aperiton - Page de connexion</title>
-	    <meta charset="utf-8" />
-        <!-- Importation du fichier style css -->
-        <link rel="stylesheet" href="../css/style.css" media="screen" type="text/css" />
-</head>
+        $username = mysqli_real_escape_string($mysqli,htmlspecialchars($_POST['username'])); 
+        $password = mysqli_real_escape_string($mysqli,htmlspecialchars($_POST['password']));
 
-<body>
-    <!-- L'entête -->
-    <?php include_once('header.php'); ?>
+        if($username !== "" && $password !== ""){ //Si le nom d'utilisateur et le mot de passe ne sont pas vides
+            $requete = "SELECT count(*) FROM utilisateur where pseudo = '".$username."' AND mot_de_passe = '".$password."' ";
+            $exec_requete = mysqli_query($mysqli,$requete);
+            $reponse = mysqli_fetch_array($exec_requete);
+            $count = $reponse['count(*)'];
 
-    <!-- Le corps de page -->
-    <div id="body_connexion" >
-        <form action="verification.php" method="POST">
-            <h1>Connexion</h1>
-            
-            <label><b>Nom d'utilisateur</b></label>
-            <input type="text" placeholder="Entrer le nom d'utilisateur" name="username" required>
-
-            <label><b>Mot de passe</b></label>
-            <input type="password" placeholder="Entrer le mot de passe" name="password" required>
-
-            <input type="submit" id='submit' value='Se connecter' >
-            <?php
-                if(isset($_GET['erreur'])){
-                    $err = $_GET['erreur'];
-                if($err==1 || $err==2)
-                    echo "<p style='color:red'>Utilisateur ou mot de passe incorrect</p>";
-                }
-            ?>
-
-        </form>
-    </div>
-
-    <!-- Le pied de page -->
-    <?php include_once('footer.php'); ?>
-</body>
-</html>
+            if($count !=0){ //L'utilisateur a été trouvé
+                $_SESSION['username'] = $username;
+                header('Location: aperiton.php');
+            }else{
+                header('Location: connexion.php?erreur=1'); // utilisateur ou mot de passe incorrect
+            }
+        }else{
+            header('Location: connexion.php?erreur=2'); // utilisateur ou mot de passe vide
+        }
+    }else{
+        header('Location: connexion.php');
+    }
+    mysqli_close($mysqli); // fermer la connexion
+?>
