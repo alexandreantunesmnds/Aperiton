@@ -39,54 +39,65 @@
                 //echo "1: ".$random_id_recipe_1." 2: ".$random_id_recipe_2." 3: ".$random_id_recipe_3;
             ?>
             <!-- Affichage aléatoire de trois recettes --> 
-            <!-- Recette aléatoire 1 -->
-            <?php 
-                $requete = "SELECT nom, ingredients, preparation,photo FROM recettes WHERE id_recette = $random_id_recipe_1";
-                $exec_requete = mysqli_query($mysqli,$requete);
-                $reponse = mysqli_fetch_array($exec_requete);
-            ?>
-            <a href="recette.php?nom=<?php echo $reponse['nom']; ?>">
-                <div class="random_recipe">
-                    <div id="recipe_title">
-                        <?php echo $reponse['nom']; ?>
-                    </div>
-                    <?php if( $reponse['photo']!=NULL){?>
-                    <img src="../<?php echo $reponse['photo']; ?>">
-                    <?php }?>
+            <main>
+                <!-- Recette aléatoire 1 -->
+                <?php 
+                    $requete = "SELECT nom, ingredients, preparation,photo FROM recettes WHERE id_recette = $random_id_recipe_1";
+                    $exec_requete = mysqli_query($mysqli,$requete);
+                    $reponse = mysqli_fetch_array($exec_requete);
+                ?>
+                <div class='card' style="background-image:url('../<?php if( $reponse['photo']!=NULL)echo $reponse['photo'];?>')">
+                    <a href="recette.php?nom=<?php echo $reponse['nom']; ?>">
+                        <div class='info'>
+                            <style>
+                                .info:before{
+                                    background-image:url('../<?php if( $reponse['photo']!=NULL)echo $reponse['photo'];?>');
+                                }
+                            </style>
+                            <h1 class='title'><?php echo $reponse['nom']; ?></h1>
+                            <p class='description'><?php echo $reponse['preparation']; ?></p>
+                        </div>
+                    </a>
                 </div>
-            </a>
-            <!-- Recette aléatoire 2 -->
-            <?php
-                $requete = "SELECT nom, ingredients, preparation,photo FROM recettes WHERE id_recette = $random_id_recipe_2";
-                $exec_requete = mysqli_query($mysqli,$requete);
-                $reponse = mysqli_fetch_array($exec_requete);
-            ?>
-            <a href="recette.php?nom=<?php echo $reponse['nom']; ?>">
-                <div class="random_recipe">
-                    <div id="recipe_title">
-                        <?php echo $reponse['nom']; ?>
-                    </div>
-                    <?php if( $reponse['photo']!=NULL){?>
-                    <img src="../<?php echo $reponse['photo']; ?>">
-                    <?php }?>
+                <!-- Recette aléatoire 2 -->
+                <?php
+                    $requete = "SELECT nom, ingredients, preparation,photo FROM recettes WHERE id_recette = $random_id_recipe_2";
+                    $exec_requete = mysqli_query($mysqli,$requete);
+                    $reponse = mysqli_fetch_array($exec_requete);
+                ?>
+                <div class='card' style="background-image:url('../<?php if( $reponse['photo']!=NULL)echo $reponse['photo'];?>')">
+                    <a href="recette.php?nom=<?php echo $reponse['nom']; ?>">
+                        <div class='info'>
+                            <style>
+                                .info:before{
+                                    background-image:url('../<?php if( $reponse['photo']!=NULL)echo $reponse['photo'];?>');
+                                }
+                            </style>
+                            <h1 class='title'><?php echo $reponse['nom']; ?></h1>
+                            <p class='description'><?php echo $reponse['preparation']; ?></p>
+                        </div>
+                    </a>
                 </div>
-            </a>
-            <!-- Recette aléatoire 1 -->
-            <?php
-                $requete = "SELECT nom, ingredients, preparation,photo FROM recettes WHERE id_recette = $random_id_recipe_3";
-                $exec_requete = mysqli_query($mysqli,$requete);
-                $reponse = mysqli_fetch_array($exec_requete);
-            ?>
-            <a href="recette.php?nom=<?php echo $reponse['nom']; ?>">
-                <div class="random_recipe">
-                    <div id="recipe_title">
-                        <?php echo $reponse['nom']; ?>
-                    </div>
-                    <?php if( $reponse['photo']!=NULL){?>
-                    <img src="../<?php echo $reponse['photo']; ?>">
-                    <?php }?>
+                <!-- Recette aléatoire 3 -->
+                <?php
+                    $requete = "SELECT nom, ingredients, preparation,photo FROM recettes WHERE id_recette = $random_id_recipe_3";
+                    $exec_requete = mysqli_query($mysqli,$requete);
+                    $reponse = mysqli_fetch_array($exec_requete);
+                ?>
+                <div class='card'style="background-image:url('../<?php if( $reponse['photo']!=NULL)echo $reponse['photo'];?>')">
+                    <a href="recette.php?nom=<?php echo $reponse['nom']; ?>">
+                        <div class='info'>
+                            <style>
+                                .info:before{
+                                    background-image:url('../<?php if( $reponse['photo']!=NULL)echo $reponse['photo'];?>');
+                                }
+                            </style>
+                            <h1 class='title'><?php echo $reponse['nom']; ?></h1>
+                            <p class='description'><?php echo $reponse['preparation']; ?></p>
+                        </div>
+                    </a>
                 </div>
-            </a>
+            </main>
         </div>  
     </div>
 </body>

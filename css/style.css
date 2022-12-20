@@ -1,17 +1,158 @@
+:root{
+	--background: white;
+}
+
 * {
 	margin: 0;
 	padding: 0;
-    text-decoration: none;
+	text-decoration: none;
 	box-sizing: border-box;
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
+	font-family:Verdana, Geneva, Tahoma, sans-serif;
 }
 
-div #body{
-    padding : 10px;
-    width: 100% auto;;
+/* PAGE PRINCIPALE */
+main{
+	padding : 10px;
+	width: 100% auto;
+	display: flex;
 }
 
-#recipe, #random_recipe{
+.card {
+	border-radius: 16px;
+	margin: 0 auto;
+	width: 400px;
+	max-width: 100%;
+	min-height: 400px;
+	box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
+	0px 5px 8px 0px rgba(0, 0, 0, 0.14),
+	0px 1px 14px 0px rgba(0, 0, 0, 0.12);
+	overflow: hidden;
+	background: var(--background);
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.info {
+	position: relative;
+	width: 100%;
+	height: 400px;
+	background-color: #fff;
+	transform: translateY(100%)
+	translateY(-88px)
+	translateZ(0);
+	transition: transform 0.5s ease-out;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.info:before {
+	z-index: -1;
+	display: block;
+	position: absolute;
+	content: ' ';
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	background: var(--background);
+	background-repeat: no-repeat;
+	filter: blur(10px);
+	background-size: cover;
+	opacity: 0.25;
+	transform: translateY(-100%)
+	translateY(88px)
+	translateZ(0);
+	transition: transform 0.5s ease-out;
+}
+
+.card:hover .info, .card:hover .info:before {
+	transform: translateY(0) translateZ(0);
+}
+
+.title {
+	margin: 0;
+	padding: 24px;
+	padding-bottom: 10px;
+	font-size: 30px;
+	line-height: 1;
+	color: #F58549;
+}
+
+.description {
+	margin: 0;
+	padding: 0 24px 24px;
+	padding-top: 40px;
+	font-size: 18px;
+	line-height: 1.5;
+}
+
+@media (min-width:800px) {
+	h1 {
+		font-size: 4.236em;
+		font-weight: 300;
+	}
+	}
+
+p {
+	margin-bottom: 1.3em;
+	line-height: 1.618;
+}
+
+@media (min-width:800px) {
+	p {
+		font-size: 1.3em
+	}
+}
+
+a{
+	color: black;
+	text-decoration : none;
+}
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+hr{
+	height: 3px;
+	background-color: #F58549;
+	border: none;
+}
+h1,h2,h3{
+	color: #F58549;
+	background-color: white;
+}
+
+footer{
+	background: rgb(240, 240, 240);
+}
+
+input[type=text]{
+	width: 100%;
+	padding: 12px 20px;
+	margin: 8px 0;
+	display: inline-block;
+	border: 1px solid #ccc;
+	box-sizing: border-box;
+}
+
+#favorite-button {
+	/* définissez la couleur de fond souhaitée ici */
+	background-color: #F58549;
+	color: white;
+	/* ajoutez une bordure au bouton */
+	border: 1px solid black;
+	/* ajoutez un peu de marge pour améliorer l'apparence */
+	margin: 10px;
+	/* ajoutez un peu de padding pour améliorer l'apparence */
+	padding: 10px;
+}
+
+/* PAGE RECETTE */
+#ariane{
+	margin: 10px;
+}
+
+#recipe{
     border: 2px solid #F58549;
     width: 80%;
     border-radius: 10px;
@@ -40,10 +181,12 @@ div #body{
     overflow: hidden;
     /*text-align: bottom;*/
 }
-.random_recipe img {
+img {
     display: block;
     width: 60%;
     margin: 0 auto;
+	background-repeat: no-repeat;
+	background-size: cover;
 }
 
 .recipe{
@@ -51,51 +194,4 @@ div #body{
     margin-right:10%;
 }
 
-a{
-    color: black;
-    text-decoration : none;
-}
-img {
-    max-width: 100%;
-    max-height: 100%;
-  }
 
-hr{
-    height: 3px;
-    background-color: #F58549;
-    border: none;
-}
-h1,h2,h3{
-    color: #F58549;
-    background-color: white;
-}
-#recipe_ingredients,#recipe_preparation{
-    background-color: #F58549;
-    color:white;
-
-}
-footer{
-    background: rgb(240, 240, 240);
-}
-
-input[type=text]{
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-}
-
-#favorite-button {
-    /* définissez la couleur de fond souhaitée ici */
-    background-color: #F58549;
-    color: white;
-    /* ajoutez une bordure au bouton */
-    border: 1px solid black;
-    /* ajoutez un peu de marge pour améliorer l'apparence */
-    margin: 10px;
-    /* ajoutez un peu de padding pour améliorer l'apparence */
-    padding: 10px;
-  }
-  
