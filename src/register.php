@@ -39,56 +39,9 @@
 
         //On vérifie toute les données
         $conforme = true;
-            //On vérifie la date de naissance
-            if(!verifierDateEtAge($birth)){
-                $conforme = false;
-                header('Location: connexion.php?erreur=3');
-            }
-
-            //On vérifie le nom
-            if(!preg_match('/^[A-Z][\p{L}-]*$/', $name)){
-                $conforme = false;
-                header('Location: connexion.php?erreur=4');
-            }
-
-            //On vérifie le prénom
-            if(!preg_match('/^[A-Z][\p{L}-]*$/', $firstname)){
-                $conforme = false;
-                header('Location: connexion.php?erreur=5');
-            }
-
-            //On vérifie l'adresse mail
-            if (!preg_match ( " /^.+@.+\.[a-zA-Z]{2,}$/ " , $mail )){
-                $conforme = false;
-                header('Location: connexion.php?erreur=6');
-            }
-
-            //On vérifie l'adresse postal
-            if(!preg_match('([0-9]*) ?([a-zA-Z,\. ]*) ?([0-9]{5}) ?([a-zA-Z]*', $ad)){
-                $conforme = false;
-                header('Location: connexion.php?erreur=7');
-            }
-
-            //On vérifie le code postal
-            if(!preg_match('^(([0-8][0-9])|(9[0-5])|(2[ab]))[0-9]{3}$', $cp)){
-                $conforme = false;
-                header('Location: connexion.php?erreur=8');
-            }
-
-            //On vérifie le nom de la ville
-            if(!preg_match("^[a-zA-Z]([-' ]?[a-zA-Z])*$", $ville)){
-                $conforme = false;
-                header('Location: connexion.php?erreur=9');
-            }
-
-            //On vérifie le numéro de téléphone
-            if (!preg_match ( " #^[0-9]{2}[-/ ]?[0-9]{2}[-/ ]?[0-9]{2}[-/ ]?[0-9]{2}[-/ ]?[0-9]{2}?$# " , $phone ) ){
-                $conforme = false;
-                header('Location: connexion.php?erreur=10');
-            }
 
             //On vérifie le pseudo (bdd et conforme)
-            if(!preg_match("/^[A-Z][\p{L}-]*$/", $login)){
+            if(!empty($login) && !preg_match("/^[A-Z][\p{L}-]*$/", $login)){
                 $requete = "SELECT count(*) FROM utilisateur where pseudo = '".$username."'";
                 $exec_requete = mysqli_query($mysqli,$requete);
                 $reponse = mysqli_fetch_array($exec_requete);
@@ -100,6 +53,7 @@
                 }
             }
 
+            //On vérifie les mots de passe
             if(strcmp($password,$repassword)!=0){
                 $conforme = false;
                 header('Location: connexion.php?erreur=12');
@@ -110,11 +64,59 @@
                 }
             }
 
+            //On vérifie la date de naissance
+            if(!empty($birth) && !verifierDateEtAge($birth)){
+                $conforme = false;
+                header('Location: connexion.php?erreur=3');
+            }
+
+            //On vérifie le nom
+            if(!empty($name) && !preg_match('/^[A-Z][\p{L}-]*$/', $name)){
+                $conforme = false;
+                header('Location: connexion.php?erreur=4');
+            }
+
+            //On vérifie le prénom
+            if(!empty($firstname) && !preg_match('/^[A-Z][\p{L}-]*$/', $firstname)){
+                $conforme = false;
+                header('Location: connexion.php?erreur=5');
+            }
+
+            //On vérifie l'adresse mail
+            if (!empty($mail) && !preg_match ( " /^.+@.+\.[a-zA-Z]{2,}$/ " , $mail )){
+                $conforme = false;
+                header('Location: connexion.php?erreur=6');
+            }
+
+            //On vérifie l'adresse postal
+            if(!empty($ad) && !preg_match('([0-9]*) ?([a-zA-Z,\. ]*) ?([0-9]{5}) ?([a-zA-Z]*', $ad)){
+                $conforme = false;
+                header('Location: connexion.php?erreur=7');
+            }
+
+            //On vérifie le code postal
+            if(!empty($cp) && !preg_match('^(([0-8][0-9])|(9[0-5])|(2[ab]))[0-9]{3}$', $cp)){
+                $conforme = false;
+                header('Location: connexion.php?erreur=8');
+            }
+
+            //On vérifie le nom de la ville
+            if(!empty($city) && !preg_match("^[a-zA-Z]([-' ]?[a-zA-Z])*$", $city)){
+                $conforme = false;
+                header('Location: connexion.php?erreur=9');
+            }
+
+            //On vérifie le numéro de téléphone
+            if (!empty($phone) && !preg_match ( " #^[0-9]{2}[-/ ]?[0-9]{2}[-/ ]?[0-9]{2}[-/ ]?[0-9]{2}[-/ ]?[0-9]{2}?$# " , $phone ) ){
+                $conforme = false;
+                header('Location: connexion.php?erreur=10');
+            }
+
         //On insere toute les données si celles si sont valides
         if($conforme){
             //On commence par haché son mdp
             $pass = password_hash($password,PASSWORD_DEFAULT);
-            $requete = "INSERT INTO `utilisateur`(`sexe`, `nom`, `prenom`, `pseudo`, `mot_de_passe`, `adresse_mail`, `adresse_postale`, `code_pos`, `ville`, `num_tel`, `date_naiss`) VALUES ('".$sex."','".$name."','".$firstname."','".$login."','".$password."','".$mail."','".$ad."','".$cp."','".$city."','".$phone."','".$birth."')";
+            $requete = "INSERT INTO `utilisateur`(`sexe`, `nom`, `prenom`, `pseudo`, `mot_de_passe`, `adresse_mail`, `adresse_postale`, `code_pos`, `ville`, `num_tel`, `date_naiss`) VALUES ('".$sex."','".$name."','".$firstname."','".$login."','".$pass."','".$mail."','".$ad."','".$cp."','".$city."','".$phone."','".$birth."')";
             mysqli_query($mysqli,$requete);
             $_SESSION['username'] = $username;
             header('Location: aperiton.php');
