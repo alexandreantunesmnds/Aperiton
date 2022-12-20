@@ -23,7 +23,7 @@
             nom VARCHAR(50),
             prenom VARCHAR(50),
             pseudo VARCHAR(50) NOT NULL,
-            mot_de_passe VARCHAR(50) NOT NULL,
+            mot_de_passe VARCHAR(100) NOT NULL,
             adresse_mail VARCHAR(50),
             adresse_postale VARCHAR(50),
             code_pos VARCHAR(50),

@@ -9,12 +9,12 @@
         $password = mysqli_real_escape_string($mysqli,htmlspecialchars($_POST['password']));
 
         if($username !== "" && $password !== ""){ //Si le nom d'utilisateur et le mot de passe ne sont pas vides
-            $requete = "SELECT count(*) FROM utilisateur where pseudo = '".$username."' AND mot_de_passe = '".$password."' ";
+            $requete = "SELECT mot_de_passe FROM utilisateur where pseudo = '".$username."'";
             $exec_requete = mysqli_query($mysqli,$requete);
             $reponse = mysqli_fetch_array($exec_requete);
-            $count = $reponse['count(*)'];
+            $hashed_password = $reponse['mot_de_passe'];
 
-            if($count !=0){ //L'utilisateur a été trouvé
+            if(password_verify($password,$hashed_password)){
                 $_SESSION['username'] = $username;
                 header('Location: aperiton.php');
             }else{

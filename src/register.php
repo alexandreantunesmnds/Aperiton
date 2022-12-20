@@ -1,19 +1,18 @@
 <?php
     session_start();
 
-    function verifierDateEtAge($birth){
-        // date aujourd'hui
-        $date = new DateTime();
-        // date - 18 ans
-        $date_18 = $date->sub(new DateInterval('P18Y'));
-        // si $_POST['date_naissance'] est au format jj-mm-yyyy, par exemple = 25-12-2001 on le converti au format dateTime avec DateTime::createFromFormat
-        $birth = DateTime::createFromFormat('j-m-Y', $birth);
-        if($birth >= $date_18){
-            return true;
+    function verifierAge($birth){
+        $dateNaissance = "15-06-1995";
+        $aujourdhui = date("Y-m-d");
+        $diff = date_diff(date_create($birth), date_create($aujourdhui));
+        //echo 'Votre age est '.$diff->format('%y');
+        if($diff->format('%y') >= 18){
+            $rep = true;
         }
         else{
-            return false;
+            $rep = false;
         }
+        return $rep;
     }
 
     if(isset($_POST['username']) && (isset($_POST['password']))){
@@ -21,27 +20,33 @@
         $db = 'Boissons';
         $mysqli=mysqli_connect('localhost', 'root', '',$db) or die("Erreur de connexion");
 
-        $username = mysqli_real_escape_string($mysqli,htmlspecialchars($_POST['username'])); 
-        $password = mysqli_real_escape_string($mysqli,htmlspecialchars($_POST['password']));
+        
 
-        //On récupère toute autre données
-        $sex = mysqli_real_escape_string($mysqli,htmlspecialchars($_POST['sexe']));
-        $repassword = mysqli_real_escape_string($mysqli,htmlspecialchars($_POST['repassword']));
-        $birth = mysqli_real_escape_string($mysqli,htmlspecialchars($_POST['naissance']));
-        $name = mysqli_real_escape_string($mysqli,htmlspecialchars($_POST['nom']));
-        $firstname = mysqli_real_escape_string($mysqli,htmlspecialchars($_POST['prenom']));
-        $mail = mysqli_real_escape_string($mysqli,htmlspecialchars($_POST['mail']));
-        $ad = mysqli_real_escape_string($mysqli,htmlspecialchars($_POST['ad']));
-        $cp = mysqli_real_escape_string($mysqli,htmlspecialchars($_POST['cp']));
-        $city = mysqli_real_escape_string($mysqli,htmlspecialchars($_POST['ville']));
-        $phone = mysqli_real_escape_string($mysqli,htmlspecialchars($_POST['phone']));
-        $login = mysqli_real_escape_string($mysqli,htmlspecialchars($_POST['username']));
-
+        //On déclare toutes nos variables
+        $sex;
+        $username;
+        $password;
+        $repassword;
+        $birth;
+        $name;
+        $firstname;
+        $phone;
+        $mail;
+        $ad;
+        $cp;
+        $city;
+        
         //On vérifie toute les données
         $conforme = true;
 
+            //On vérifie le sexe
+            if(isset($_POST['sexe'])){
+                $sex = mysqli_real_escape_string($mysqli,htmlspecialchars($_POST['sexe']));
+            }
+
             //On vérifie le pseudo (bdd et conforme)
-            if(!empty($login) && !preg_match("/^[A-Z][\p{L}-]*$/", $login)){
+            $username = mysqli_real_escape_string($mysqli,htmlspecialchars($_POST['username'])); 
+            if(!empty($username) && !preg_match("/^[A-Z][\p{L}-]*$/", $username)){
                 $requete = "SELECT count(*) FROM utilisateur where pseudo = '".$username."'";
                 $exec_requete = mysqli_query($mysqli,$requete);
                 $reponse = mysqli_fetch_array($exec_requete);
@@ -54,6 +59,9 @@
             }
 
             //On vérifie les mots de passe
+            $password = mysqli_real_escape_string($mysqli,htmlspecialchars($_POST['password']));
+            $repassword = mysqli_real_escape_string($mysqli,htmlspecialchars($_POST['repassword']));
+
             if(strcmp($password,$repassword)!=0){
                 $conforme = false;
                 header('Location: connexion.php?erreur=12');
@@ -65,58 +73,85 @@
             }
 
             //On vérifie la date de naissance
-            if(!empty($birth) && !verifierDateEtAge($birth)){
-                $conforme = false;
-                header('Location: connexion.php?erreur=3');
+            if(isset($_POST['naissance'])){
+                $birth = mysqli_real_escape_string($mysqli,htmlspecialchars($_POST['naissance']));
+                if(!empty($birth) && verifierAge($birth)==false){
+                    $conforme = false;
+                    header('Location: connexion.php?erreur=3');
+                }else{
+                    $timestamp = strtotime($birth); 
+                    $birthDate =    date("Y-m-d", $timestamp );
+                }
             }
 
             //On vérifie le nom
-            if(!empty($name) && !preg_match('/^[A-Z][\p{L}-]*$/', $name)){
-                $conforme = false;
-                header('Location: connexion.php?erreur=4');
+            if(isset($_POST['nom'])){
+                $name = mysqli_real_escape_string($mysqli,htmlspecialchars($_POST['nom']));
+                if(!empty($name) && !preg_match('/^[A-Z][\p{L}-]*$/', $name)){
+                    $conforme = false;
+                    header('Location: connexion.php?erreur=4');
+                }
             }
 
             //On vérifie le prénom
-            if(!empty($firstname) && !preg_match('/^[A-Z][\p{L}-]*$/', $firstname)){
-                $conforme = false;
-                header('Location: connexion.php?erreur=5');
+            if(isset($_POST['prenom'])){
+                $firstname = mysqli_real_escape_string($mysqli,htmlspecialchars($_POST['prenom']));
+                if(!empty($firstname) && !preg_match('/^[A-Z][\p{L}-]*$/', $firstname)){
+                    $conforme = false;
+                    header('Location: connexion.php?erreur=5');
+                }
             }
 
             //On vérifie l'adresse mail
-            if (!empty($mail) && !preg_match ( " /^.+@.+\.[a-zA-Z]{2,}$/ " , $mail )){
-                $conforme = false;
-                header('Location: connexion.php?erreur=6');
+            if(isset($_POST['mail'])){
+                $mail = mysqli_real_escape_string($mysqli,htmlspecialchars($_POST['mail']));
+                if (!empty($mail) && !preg_match ( " /^.+@.+\.[a-zA-Z]{2,}$/ " , $mail )){
+                    $conforme = false;
+                    header('Location: connexion.php?erreur=6');
+                }
             }
 
             //On vérifie l'adresse postal
-            if(!empty($ad) && !preg_match('([0-9]*) ?([a-zA-Z,\. ]*) ?([0-9]{5}) ?([a-zA-Z]*', $ad)){
-                $conforme = false;
-                header('Location: connexion.php?erreur=7');
+            if(isset($_POST['ad'])){
+                $ad = mysqli_real_escape_string($mysqli,htmlspecialchars($_POST['ad']));
+                /*if(!empty($ad)){
+                    $conforme = false;
+                    header('Location: connexion.php?erreur=7');
+                }*/
             }
 
             //On vérifie le code postal
-            if(!empty($cp) && !preg_match('^(([0-8][0-9])|(9[0-5])|(2[ab]))[0-9]{3}$', $cp)){
-                $conforme = false;
-                header('Location: connexion.php?erreur=8');
+            if(isset($_POST['cp'])){
+                $cp = mysqli_real_escape_string($mysqli,htmlspecialchars($_POST['cp']));
+                if(!empty($cp) && !preg_match('/^(([0-8][0-9])|(9[0-5]))[0-9]{3}$/', $cp)){
+                    $conforme = false;
+                    header('Location: connexion.php?erreur=8');
+                }
             }
 
             //On vérifie le nom de la ville
-            if(!empty($city) && !preg_match("^[a-zA-Z]([-' ]?[a-zA-Z])*$", $city)){
-                $conforme = false;
-                header('Location: connexion.php?erreur=9');
+            if(isset($_POST['ville'])){
+                $city = mysqli_real_escape_string($mysqli,htmlspecialchars($_POST['ville']));
+                if(!empty($city) && !preg_match("/^[a-zA-Z]+(?:[\s-][a-zA-Z]+)*$/", $city)){
+                    $conforme = false;
+                    header('Location: connexion.php?erreur=9');
+                }
             }
 
             //On vérifie le numéro de téléphone
-            if (!empty($phone) && !preg_match ( " #^[0-9]{2}[-/ ]?[0-9]{2}[-/ ]?[0-9]{2}[-/ ]?[0-9]{2}[-/ ]?[0-9]{2}?$# " , $phone ) ){
-                $conforme = false;
-                header('Location: connexion.php?erreur=10');
+            if(isset($_POST['phone'])){
+                $phone = mysqli_real_escape_string($mysqli,htmlspecialchars($_POST['phone']));
+                if (!empty($phone) && !preg_match ( "/^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$/" , $phone ) ){
+                    $conforme = false;
+                    header('Location: connexion.php?erreur=10');
+                }
             }
 
         //On insere toute les données si celles si sont valides
         if($conforme){
             //On commence par haché son mdp
             $pass = password_hash($password,PASSWORD_DEFAULT);
-            $requete = "INSERT INTO `utilisateur`(`sexe`, `nom`, `prenom`, `pseudo`, `mot_de_passe`, `adresse_mail`, `adresse_postale`, `code_pos`, `ville`, `num_tel`, `date_naiss`) VALUES ('".$sex."','".$name."','".$firstname."','".$login."','".$pass."','".$mail."','".$ad."','".$cp."','".$city."','".$phone."','".$birth."')";
+            $requete = "INSERT INTO `utilisateur`(`sexe`, `nom`, `prenom`, `pseudo`, `mot_de_passe`, `adresse_mail`, `adresse_postale`, `code_pos`, `ville`, `num_tel`, `date_naiss`) VALUES ('".$sex."','".$name."','".$firstname."','".$username."','".$pass."','".$mail."','".$ad."','".$cp."','".$city."','".$phone."','".$birthDate."')";
             mysqli_query($mysqli,$requete);
             $_SESSION['username'] = $username;
             header('Location: aperiton.php');
