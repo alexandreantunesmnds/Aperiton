@@ -271,9 +271,9 @@
     </div>
     <!-- La barre de navigation horizontale -->
     <nav id="toolbar">
-        <a href="page1.html">Toutes nos recettes</a>
-        <a href="page2.html">Les recettes par catégories</a>
-        <a href="page2.html">Recette au hasard</a>
+        <span><a href="page1.html">Toutes nos recettes</a></span>
+        <span><a href="page2.html">Les recettes par catégories</a></span>
+        <span><a href="page2.html">Recette au hasard</a></span>
     </nav>
 
 </header>

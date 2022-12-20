@@ -195,3 +195,38 @@ img {
 }
 
 
+/* PAGE RECHERCHE */
+.search_recipes{
+    padding-left: 20%;
+    padding-right: 20%;
+}
+
+.search_recipes h1{
+	font-size: 50px;
+}
+
+.search_recipe{
+	border: 2px solid #F58549;
+    border-radius: 10px;
+    height: 200px;
+    display: flex;
+    padding: 20px;
+    margin: 20px;
+}
+
+.recipe_photo{
+	width: 30%;
+    background-image: url(https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg);
+    margin-right: 20px;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-size: 100%;
+}
+
+.search_recipe_info{
+    width: 70%;
+}
+
+.search_recipe_info p{
+	font-size: 20px;
+}

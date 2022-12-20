@@ -106,10 +106,14 @@ header #top_right button:hover{
 
 header nav{
     height: 30px;
-    padding-top: 10px;
+    padding: 10px;
     text-align: center;
     vertical-align: top;
     background: rgb(240, 240, 240);
+}
+
+header nav span{
+  margin: 20px;
 }
 
 header a{
