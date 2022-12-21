@@ -49,9 +49,9 @@
                 ?>
                 <div class='card' style="background-image:url('../<?php if( $reponse['photo']!=NULL)echo $reponse['photo'];?>')">
                     <a href="recette.php?nom=<?php echo $reponse['nom']; ?>">
-                        <div class='info'>
+                        <div class='info' id="info1">
                             <style>
-                                .info:before{
+                                #info1:before{
                                     background-image:url('../<?php if( $reponse['photo']!=NULL)echo $reponse['photo'];?>');
                                 }
                             </style>
@@ -68,9 +68,9 @@
                 ?>
                 <div class='card' style="background-image:url('../<?php if( $reponse['photo']!=NULL)echo $reponse['photo'];?>')">
                     <a href="recette.php?nom=<?php echo $reponse['nom']; ?>">
-                        <div class='info'>
+                        <div class='info' id="info2">
                             <style>
-                                .info:before{
+                                #info2:before{
                                     background-image:url('../<?php if( $reponse['photo']!=NULL)echo $reponse['photo'];?>');
                                 }
                             </style>
@@ -87,9 +87,9 @@
                 ?>
                 <div class='card'style="background-image:url('../<?php if( $reponse['photo']!=NULL)echo $reponse['photo'];?>')">
                     <a href="recette.php?nom=<?php echo $reponse['nom']; ?>">
-                        <div class='info'>
+                        <div class='info' id="info3">
                             <style>
-                                .info:before{
+                                #info3:before{
                                     background-image:url('../<?php if( $reponse['photo']!=NULL)echo $reponse['photo'];?>');
                                 }
                             </style>

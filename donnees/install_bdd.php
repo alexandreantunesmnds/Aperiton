@@ -165,7 +165,7 @@
          
          
          $id_recette+=1;
-         $nom_photo = "";
+         $nom_photo = "photos/coktail_default.jpg";
          foreach($tab_image as $nom_fichier){
             $str = sprintf("/^%s_.*$/",$id_recette);
             //echo $str."</br>";
