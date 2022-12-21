@@ -6,6 +6,7 @@
 	    <meta charset="utf-8" />
         <!-- Importation du fichier style css -->
         <link rel="stylesheet" href="../css/style.css" media="screen" type="text/css" />
+        <link rel="icon" type="image/png" href="../outils/icon.png" />
 </head>
 
 <!-- L'entête -->
