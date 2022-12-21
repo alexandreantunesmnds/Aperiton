@@ -20,9 +20,15 @@
     $all_recipe = mysqli_query($mysqli,$requete);
 
     if(isset($_GET['search_recipe']) && !empty($_GET['search_recipe'])){
-        $recherche = htmlspecialchars($_GET['search_recipe']);
-        $requete = "SELECT * FROM recettes WHERE nom LIKE '%$recherche%' OR ingredients LIKE '%$recherche%' ORDER BY id_recette DESC";
-        $all_recipe = mysqli_query($mysqli,$requete);
+        if(strcmp($_GET['search_recipe'],"tout") != 0){
+            $recherche = htmlspecialchars($_GET['search_recipe']);
+            $requete = "SELECT * FROM recettes WHERE nom LIKE '%$recherche%' OR ingredients LIKE '%$recherche%' ORDER BY id_recette DESC";
+            $all_recipe = mysqli_query($mysqli,$requete);
+        }else{
+            $recherche = htmlspecialchars($_GET['search_recipe']);
+            $requete = "SELECT * FROM recettes ORDER BY nom";
+            $all_recipe = mysqli_query($mysqli,$requete);
+        }
     }
 ?>
 
@@ -31,7 +37,7 @@
         <a href="aperiton.php">Accueil</a> > recettes </a>
     </span>
     <div class="search_recipes">
-        <h1>Résultats pour : 
+        <h1 style="font-size: 50px;">Résultats pour : 
             <?php
             if(isset($_GET['search_recipe']) && !empty($_GET['search_recipe'])){
                 echo $_GET['search_recipe'];

@@ -271,9 +271,26 @@
     </div>
     <!-- La barre de navigation horizontale -->
     <nav id="toolbar">
-        <span><a href="page1.html">Toutes nos recettes</a></span>
+        <span><a href="recherche.php?search_recipe=tout">Toutes nos recettes</a></span>
         <span><a href="page2.html">Les recettes par catégories</a></span>
-        <span><a href="page2.html">Recette au hasard</a></span>
+        <!-- On récupère une recette aléatoire -->
+        <?php 
+        /* Connexion à la base de données */
+        $mysqli=mysqli_connect('localhost', 'root', '','Boissons') or die("Erreur de connexion");
+
+        $requete = "SELECT count(*) FROM recettes";
+        $exec_requete = mysqli_query($mysqli,$requete);
+        $reponse = mysqli_fetch_array($exec_requete);
+        $count = $reponse['count(*)'];
+
+        /* On génère aléatoirement 3 nombre entre 1 et le nombre totale de recette */ 
+        $random_id_recipe = rand(1,$count);
+
+        $requete = "SELECT nom FROM recettes WHERE id_recette = $random_id_recipe";
+        $exec_requete = mysqli_query($mysqli,$requete);
+        $reponse = mysqli_fetch_array($exec_requete);
+        ?>
+        <span><a href="recette.php?nom=<?php echo $reponse['nom']; ?>">Recette au hasard</a></span>
     </nav>
 
 </header>
