@@ -245,8 +245,8 @@
                 'Feuilles de menthe',
                 'Jus d"abricots',
                 'Jus de pommes'];
-            autocomplete(document.getElementById("myInput"), drinks);
-            autocomplete(document.getElementById("myInput"), ingredients);
+                array = drinks.concat(ingredients);
+                autocomplete(document.getElementById("myInput"), array);
             </script> 
         <!-- Bouton de connexion et de direction vers la page favoris -->
         <div id="top_right">
