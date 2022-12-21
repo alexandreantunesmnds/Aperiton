@@ -10,8 +10,8 @@
    
   
    //On se connecte à la base de donnée
-	$mysqli=mysqli_connect('127.0.0.1', 'root', '') or die("Erreur de connexion");
-	$base="Boissons";
+   $base="Boissons";
+	$mysqli=mysqli_connect('127.0.0.1', 'root', '',$base) or die("Erreur de connexion");
    //On crée la base de donnée
 	$Sql="
 		DROP DATABASE IF EXISTS $base;
@@ -129,6 +129,22 @@
             }
          }
 		}
+
+      //Nom du repertoire où se situe les photos
+      $nom_repertoire = '../photos';
+      //on ouvre le répertoire
+      $pointeur = opendir($nom_repertoire);
+      $tab_image = array();
+      while ($fichier = readdir($pointeur)){
+         $extension_file 	= strtolower( pathinfo($nom_repertoire.'/'.$fichier, PATHINFO_EXTENSION) );
+         $extensions_array 	= array('gif','jpg','jpeg','png');
+         if ( in_array($extension_file, $extensions_array) ){
+            $tab_image[] = $fichier;
+         }
+      }
+      //on ferme le répertoire
+      closedir($pointeur);
+
       //On parcourt chaque recette
       foreach($Recettes as $id_recette => $liste_recettes){
          if(array_key_exists("titre", $liste_recettes)){
@@ -145,41 +161,29 @@
             $preparation_recette = $liste_recettes["preparation"];
             $preparation_recette = str_replace(";",",",$preparation_recette);
          }
+         
+         
+         
+         $id_recette+=1;
+         $nom_photo = "";
+         foreach($tab_image as $nom_fichier){
+            $str = sprintf("/^%s_.*$/",$id_recette);
+            //echo $str."</br>";
+            if(preg_match($str,$nom_fichier)){
+               $nom_photo = "photos/".$nom_fichier;
+            }
+         }
+         //echo $id_recette." -> ".$nom_photo."</br>";
+
          //On écrit la requête
-         $requet = sprintf("INSERT INTO `recettes` (`nom`,`ingredients`,`preparation`) VALUES('%s','%s','%s');",
+         $requet = sprintf("INSERT INTO `recettes` (`nom`,`ingredients`,`preparation`,`photo`) VALUES('%s','%s','%s','%s');",
          mysqli_real_escape_string($mysqli,$titre_recette),
          mysqli_real_escape_string($mysqli,$ingredients_recette),
-         mysqli_real_escape_string($mysqli,$preparation_recette));
+         mysqli_real_escape_string($mysqli,$preparation_recette),
+         mysqli_real_escape_string($mysqli,$nom_photo));
+         echo $requet."</br></br>";
          $Sql = $Sql.$requet;
       }
-
-         	// Ajout des images à la table des recettes
-		$tab[] = array ("image" => "Photos/Black_velvet.jpg", "nom" => "Black velvet");
-		$tab[] = array ("image" => "Photos/Bloody_mary.jpg", "nom" => "Bloody Mary");
-		$tab[] = array ("image" => "Photos/Bora_bora.jpg", "nom" => "Bora bora");
-		$tab[] = array ("image" => "Photos/Builder.jpg", "nom" => "Builder");
-		$tab[] = array ("image" => "Photos/Caipirinha.jpg", "nom" => "Caïpirinha");
-		$tab[] = array ("image" => "Photos/Coconut_kiss.jpg", "nom" => "Coconut kiss");
-		$tab[] = array ("image" => "Photos/Cuba_libre.jpg", "nom" => "Cuba libre");
-		$tab[] = array ("image" => "Photos/Frosty_lime.jpg", "nom" => "Frosty lime");
-		$tab[] = array ("image" => "Photos/Le_vandetta.jpg", "nom" => "Le vandetta");
-		$tab[] = array ("image" => "Photos/Margarita.jpg", "nom" => "Margarita");
-		$tab[] = array ("image" => "Photos/Mojito.jpg", "nom" => "Mojito");
-		$tab[] = array ("image" => "Photos/Pina_colada.jpg", "nom" => "Piña Colada");
-		$tab[] = array ("image" => "Photos/Raifortissimo.jpg", "nom" => "Raifortissimo");
-      $tab[] = array ("image" => "Photos/Sangria_sans_alcool.jpg", "nom" => "Sangria sans alcool");
-		$tab[] = array ("image" => "Photos/Screwdriver.jpg", "nom" => "Screwdriver");
-		$tab[] = array ("image" => "Photos/Shoot_up.jpg", "nom" => "Shoot up");
-		$tab[] = array ("image" => "Photos/Tequila_sunrise.jpg", "nom" => "Tequila sunrise");
-		$tab[] = array ("image" => "Photos/Tipunch.jpg", "nom" => "Ti'punch");
-			
-		for ($cmpt = 0; $cmpt< count($tab); $cmpt++){
-			$img = mysqli_real_escape_string($mysqli, $tab[$cmpt]['image']);
-			$nom = mysqli_real_escape_string($mysqli, $tab[$cmpt]['nom']);
-			//echo $img.' '.$nom;
-			$Sql .= "UPDATE recettes SET photo='{$img}' WHERE nom LIKE '{$nom}';  ";
-		}
-
 
          //On associe les aliments à la recette
          if(array_key_exists("index", $liste_recettes)){
