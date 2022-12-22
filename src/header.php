@@ -252,7 +252,7 @@
         <div id="top_right">
             <!-- Le cas où l'utilisateur est connu -->
             <?php if(isset($_SESSION['username'])): ?>
-                    <button>
+                    <button onclick="window.location.href = 'favoris.php';">>
                         Mes favoris
                     </button>   
                     <button onclick="window.location.href = 'aperiton.php?deconnexion=true';">
