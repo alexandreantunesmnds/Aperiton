@@ -7,21 +7,45 @@
     <!-- Importation du fichier style css -->
     <link rel="stylesheet" href="../css/style.css" media="screen" type="text/css" />
     <link rel="icon" type="image/png" href="../outils/icon.png" />
+    <script src="https://kit.fontawesome.com/1de3738fce.js" crossorigin="anonymous"></script>
 </head>
+
 
 <!-- L'entête -->
 <?php include_once('header.php'); ?>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
 <body>
-    <?php 
+    <?php
+        $mysqli=mysqli_connect('localhost', 'root', '','Boissons') or die("Erreur de connexion");
+        
         if(isset($_GET['nom'])){ 
             $recipe_title = $_GET['nom'];
 
             /* On recherche la recette dans la bdd */ 
-            $mysqli=mysqli_connect('localhost', 'root', '','Boissons') or die("Erreur de connexion");
-            $requete = "SELECT ingredients, preparation,photo FROM recettes WHERE nom = '$recipe_title'";
+            $requete = "SELECT id_recette, ingredients, preparation,photo FROM recettes WHERE nom = '$recipe_title'";
             $exec_requete = mysqli_query($mysqli,$requete);
             $reponse = mysqli_fetch_array($exec_requete);
+        }
+
+        function addToFavorite(){
+            if(isset($_SESSION['username'])){
+                $requete = "SELECT id_utilisateur FROM utilisateur WHERE pseudo = '".$_SESSION['username']."'";
+                $exec_requete = mysqli_query($mysqli,$requete);
+                $users = mysqli_fetch_array($exec_requete);
+                
+                $requete = "SELECT count(*) FROM favoris WHERE id_recette = '".$reponse['id_recette']."' AND id_utilisateur = '".$users['id_utilisateur']."'";
+                $exec_requete = mysqli_query($mysqli,$requete);
+                $rep = mysqli_fetch_array($exec_requete);
+                $count = $rep['count(*)'];
+
+                if($count !=0){ //L'utilisateur a déjà la recette dans ses favoris, alors on le supprime de ses favoris
+                    
+                }else{ //On ajoute dans les favoris
+                    $requete = "INSERT INTO `favoris` (`id_recette`, `id_utilisateur`) VALUES ('".$reponse['id_recette']."', '".$users['id_utilisateur']."')";
+                    $exec_requete = mysqli_query($mysqli,$requete);
+                }
+            }else{
+                
+            }
         }
     ?>
     <span id="ariane">
@@ -29,40 +53,43 @@
     </span>
     <div id="recipe">
         <div class="recipe">
-            <div id="recipe_title">
+            <div id="recipe_title" style="align-text:center; text-align: center; margin-top:10px; margin-bottom:10px; display:flex; position: relative; z-index:1;">
                 <h1><?php echo $recipe_title; ?></h1>
+                <div style="position : absolute; z-index : 2; right:10px;">
+                <button id="favorite" class="favorite"></button>
+                    <script>
+                        document.querySelector('.favorite').addEventListener('click', (e) => {
+                            e.currentTarget.classList.toggle('liked');
+                            cnx().ajax.phpPostSyn("recette.php", "addToFavorite");
+                        });
+                    </script>
+                </div>
             </div>
-            <div id="recipe_photo">
-            <img src="../<?php echo $reponse['photo']; ?>">
+            <style>
+                .recipe_photo{    
+                    width: 100%;    
+                    height: 800px;
+                    background-image: url(https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg);
+                    margin-right: 20px;
+                    background-repeat: no-repeat;
+                    background-size: cover;
+                    background-size: 100%;
+                }
+            </style>
+            <div class="recipe_photo" style="background-image:url('../<?php if( $reponse['photo']!=NULL)echo $reponse['photo'];?>')">
+               <!-- <?php if( $reponse['photo']!=NULL)echo $reponse['photo'];?>-->
             </div>
-            <div id="recipe_ingredients">
+            <div id="recipe_ingredients" style="margin:10px;">
                 <hr>
                 <h2>Ingrédients</h2>
                 <?php echo $reponse['ingredients']; ?>
             </div>
-            <div id="recipe_preparation">
+            <div id="recipe_preparation" style="margin:10px;">
                 <hr>
                 <h2>Préparation</h2>
                 <?php echo $reponse['preparation']; ?>
             </div>
         </div>
-        <button id="favorite-button"><i class="fa fa-heart"></i> Favoris</button>
-        <?php
-        if(isset($_SESSION['username'])){
-        /* On recherche la recette dans la bdd */ 
-        $mysqli=mysqli_connect('localhost', 'root', '','boissons') or die("Erreur de connexion");
-        $requete = "SELECT id_recette, ingredients, preparation,photo FROM recettes WHERE nom = '$recipe_title'";
-        $exec_requete = mysqli_query($mysqli,$requete);
-        $reponse = mysqli_fetch_array($exec_requete);
-        $recipe_id = $reponse['id_recette']; // Récupérez l'ID de la recette
-        if (isset($_SESSION['user_id'])) {
-            // Récupérez l'ID de l'utilisateur de la variable de session
-            $user_id = $_SESSION['user_id'];
-            } else {
-            // L'utilisateur n'est pas connecté, affichez un message d'erreur ou redirigez-le vers la page de connexion
-            }
-        }
-        ?>
     </div>
 </body>
 

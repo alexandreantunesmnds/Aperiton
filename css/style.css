@@ -135,16 +135,39 @@ input[type=text]{
 	box-sizing: border-box;
 }
 
-#favorite-button {
-	/* définissez la couleur de fond souhaitée ici */
-	background-color: #F58549;
+.favorite {
 	color: white;
-	/* ajoutez une bordure au bouton */
-	border: 1px solid black;
-	/* ajoutez un peu de marge pour améliorer l'apparence */
-	margin: 10px;
-	/* ajoutez un peu de padding pour améliorer l'apparence */
-	padding: 10px;
+	top:40px;
+	right: 40px;
+    position : absolute;
+    z-index : 2;
+	cursor: pointer;
+	display: flex;
+  	cursor: pointer;
+	background-color: transparent;
+	border-color: transparent;
+}
+.favorite::before {
+    font-size: 3em;
+    color: #000;
+    font-family: "Font Awesome 5 Free"; font-weight: 900; content: "\f004";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+.favorite::after {
+    font-size: 3em;
+    color: #F58549;
+    font-family: "Font Awesome 5 Free"; font-weight: 900; content: "\f004";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.2s;
+}
+.favorite.liked::after {
+    transform: translate(-50%, -50%) scale(1.1);
 }
 
 /* PAGE RECETTE */
@@ -163,6 +186,8 @@ input[type=text]{
     align-content: center;
     align-items: center;
     display: inline-block;
+	position : relative ;
+	z-index : 1;
 }
 
 .random_recipe{
@@ -192,6 +217,7 @@ img {
 .recipe{
     margin-left:10%;
     margin-right:10%;
+	align-items: center;
 }
 
 

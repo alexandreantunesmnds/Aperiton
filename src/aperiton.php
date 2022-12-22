@@ -66,7 +66,7 @@
                     $exec_requete = mysqli_query($mysqli,$requete);
                     $reponse = mysqli_fetch_array($exec_requete);
                 ?>
-                <div class='card' style="background-image:url('../<?php if( $reponse['photo']!=NULL)echo $reponse['photo'];?>')">
+                <div class='card' style="height: 100px; background-image:url('../<?php if( $reponse['photo']!=NULL)echo $reponse['photo'];?>');">
                     <a href="recette.php?nom=<?php echo $reponse['nom']; ?>">
                         <div class='info' id="info2">
                             <style>
