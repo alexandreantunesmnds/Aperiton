@@ -9,8 +9,6 @@
 	<link rel="icon" type="image/png" href="../outils/icon.png" />
 </head>
 
-
-
 <body>
 	<div id="body">
 		<!-- container div -->
@@ -46,28 +44,6 @@
 				<form method="post" action="register.php">
 					<div class="signup-box">
 						<div class="sex-box">
-							<div class="error_box">
-								<?php
-									if(isset($_GET['erreur'])){
-										$err = $_GET['erreur'];
-										?>
-										<script>
-											let signup = document.querySelector(".signup");
-											let slider = document.querySelector(".slider");
-											let formSection = document.querySelector(".form-section");
-											slider.classList.add("moveslider");
-    										formSection.classList.add("form-section-move");
-										</script>
-										<?php
-										if($err==3){
-											echo "<p style='color:red; text-align:center; margin-bottom:30px;'>Le pseudo a déjà été utilisé</p>";
-										}
-										if($err==4){
-											echo "<p style='color:red; text-align:center; margin-bottom:30px;'>Vous n'avez pas sasie le même mot de passe</p>";
-										}
-									}
-								?>
-							</div>
 							Vous êtes :
 							<input type="radio" name="sexe" value="f" selected/> une femme 	
 							<input type="radio" name="sexe" value="h"/> un homme
@@ -91,9 +67,22 @@
 						<input type="password" id="password" class="password ele" name="repassword" placeholder="Confirmer le mot de passe" required minlength=8 pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Doit contenir au moins un chiffre, une lettre en majuscule, des lettres en minuscule et doit contenir au moins 8 caractères">
 			
 						<button type="submit" name="btnRegist" class="clkbtn">Je m'inscris</button>
+						<div class="error_box">
+								<?php
+									if(isset($_GET['erreur'])){
+										$err = $_GET['erreur'];
+										if($err==3){
+											echo "<p style='color:red; text-align:center; margin-bottom:30px;'>Le pseudo a déjà été utilisé</p>";
+										}
+										if($err==4){
+											echo "<p style='color:red; text-align:center; margin-bottom:30px;'>Vous n'avez pas sasie le même mot de passe</p>";
+										}
+									}
+								?>
+							</div>
 					</div>
 				</form>
-		<script src="../outils/login.js"></script>
+				<script src="../outils/login.js"></script>
 </body>
 <!-- Le pied de page -->
 <?php include_once('footer.php'); ?>

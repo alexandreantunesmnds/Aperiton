@@ -10,7 +10,6 @@
     <script src="https://kit.fontawesome.com/1de3738fce.js" crossorigin="anonymous"></script>
 </head>
 
-
 <!-- L'entête -->
 <?php include_once('header.php');   include_once('addToFavourite.php'); ?>
 <body>

@@ -7,6 +7,7 @@
         <!-- Importation du fichier style css -->
         <link rel="stylesheet" href="../css/style.css" media="screen" type="text/css" />
         <link rel="icon" type="image/png" href="../outils/icon.png" />
+        <link rel="stylesheet" href="path/to/font-awesome.css">
 </head>
 
 <!-- L'entête -->

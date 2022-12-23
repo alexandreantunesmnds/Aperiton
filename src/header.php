@@ -258,6 +258,9 @@
                     <button onclick="window.location.href = 'aperiton.php?deconnexion=true';">
                         Deconnexion
                     </button>
+                    <button onclick="window.location.href = 'profil.php';" style="width:20px;background-color: transparent;border-color: transparent;">
+                        <i class="fa-solid fa-user" style="color:#F58549;"></i>
+                    </button>
             <!-- Le cas où l'utilisateur est inconnu -->
             <?php else: ?>
                     <button onclick="window.location.href = 'connexion.php';">

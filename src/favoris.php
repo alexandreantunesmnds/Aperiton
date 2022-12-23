@@ -29,7 +29,7 @@
                 $user = mysqli_fetch_array($all_users);
 
                 //Puis ses recettes favoris
-                $requete = "SELECT * FROM recettes r, favoris f, utilisateur u WHERE r.id_recette = f.id_recette AND u.id_utilisateur = f.id_utilisateur";
+                $requete = "SELECT r.nom, r.photo,r.ingredients FROM recettes r, favoris f, utilisateur u WHERE r.id_recette = f.id_recette AND u.id_utilisateur = f.id_utilisateur";
                 $all_recipe = mysqli_query($mysqli,$requete);
 
                 if( mysqli_num_rows($all_recipe)  > 0){
