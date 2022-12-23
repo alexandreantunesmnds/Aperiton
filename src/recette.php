@@ -12,40 +12,18 @@
 
 
 <!-- L'entête -->
-<?php include_once('header.php'); ?>
+<?php include_once('header.php');   include_once('addToFavourite.php'); ?>
 <body>
-    <?php
+   <?php
         $mysqli=mysqli_connect('localhost', 'root', '','Boissons') or die("Erreur de connexion");
         
         if(isset($_GET['nom'])){ 
             $recipe_title = $_GET['nom'];
 
-            /* On recherche la recette dans la bdd */ 
+            /* On recherche la recette dans la bdd */
             $requete = "SELECT id_recette, ingredients, preparation,photo FROM recettes WHERE nom = '$recipe_title'";
             $exec_requete = mysqli_query($mysqli,$requete);
             $reponse = mysqli_fetch_array($exec_requete);
-        }
-
-        function addToFavorite(){
-            if(isset($_SESSION['username'])){
-                $requete = "SELECT id_utilisateur FROM utilisateur WHERE pseudo = '".$_SESSION['username']."'";
-                $exec_requete = mysqli_query($mysqli,$requete);
-                $users = mysqli_fetch_array($exec_requete);
-                
-                $requete = "SELECT count(*) FROM favoris WHERE id_recette = '".$reponse['id_recette']."' AND id_utilisateur = '".$users['id_utilisateur']."'";
-                $exec_requete = mysqli_query($mysqli,$requete);
-                $rep = mysqli_fetch_array($exec_requete);
-                $count = $rep['count(*)'];
-
-                if($count !=0){ //L'utilisateur a déjà la recette dans ses favoris, alors on le supprime de ses favoris
-                    
-                }else{ //On ajoute dans les favoris
-                    $requete = "INSERT INTO `favoris` (`id_recette`, `id_utilisateur`) VALUES ('".$reponse['id_recette']."', '".$users['id_utilisateur']."')";
-                    $exec_requete = mysqli_query($mysqli,$requete);
-                }
-            }else{
-                
-            }
         }
     ?>
     <span id="ariane">
