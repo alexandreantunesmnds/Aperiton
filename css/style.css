@@ -256,3 +256,55 @@ img {
 .search_recipe_info p{
 	font-size: 20px;
 }
+
+/* PAGE MONPROFIL */
+.monProfil{
+	border: 2px solid #F58549;
+    width: 80%;
+    border-radius: 10px;
+    margin-top : 1%;
+    margin-left : 10%;
+    margin-right : 10%;
+    margin-bottom: 10px;
+    align-content: center;
+    align-items: center;
+    display: inline-block;
+	position : relative ;
+	padding: 30px;
+}
+
+.monCompte, .mesIdentifiants, .mesCoordonnees{
+	margin-bottom: 30px;
+}
+
+.monProfil p{
+	font-size: 15px;
+	margin: 10px 0;
+    padding: 10px;
+	margin-top: 0;
+	margin-bottom: 0;	
+}
+
+.monProfil #input {
+	height: 20px;
+	width: 300px;
+}
+
+
+
+.validerChangement{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.validerChangement button{
+	padding: 10px;
+	border-radius: 50px;
+	background-image: linear-gradient(to right,
+			rgb(255, 195, 110),
+			rgb(255, 146, 91));
+	font-size: 22px;
+	border: none;
+	cursor: pointer;
+}
