@@ -38,6 +38,12 @@ p{
 	align-items: center;
 }
 
+.error_box{
+	text-align: center;
+	justify-content: center;
+	padding: 100px;
+}
+
 .login,
 .signup {
 	font-size: 22px;
@@ -99,6 +105,9 @@ p{
 }
 .sex-box{
 	padding-top: 100px;
+	text-align: center;
+	align-items: center;
+	justify-content: center;
 }
 
 .ele {

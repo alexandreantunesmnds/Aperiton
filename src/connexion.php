@@ -46,6 +46,28 @@
 				<form method="post" action="register.php">
 					<div class="signup-box">
 						<div class="sex-box">
+							<div class="error_box">
+								<?php
+									if(isset($_GET['erreur'])){
+										$err = $_GET['erreur'];
+										?>
+										<script>
+											let signup = document.querySelector(".signup");
+											let slider = document.querySelector(".slider");
+											let formSection = document.querySelector(".form-section");
+											slider.classList.add("moveslider");
+    										formSection.classList.add("form-section-move");
+										</script>
+										<?php
+										if($err==3){
+											echo "<p style='color:red; text-align:center; margin-bottom:30px;'>Le pseudo a déjà été utilisé</p>";
+										}
+										if($err==4){
+											echo "<p style='color:red; text-align:center; margin-bottom:30px;'>Vous n'avez pas sasie le même mot de passe</p>";
+										}
+									}
+								?>
+							</div>
 							Vous êtes :
 							<input type="radio" name="sexe" value="f" selected/> une femme 	
 							<input type="radio" name="sexe" value="h"/> un homme
@@ -64,23 +86,12 @@
 						<input type="text" name="cp" class="adress ele" placeholder="Code postal">
 						<input type="text" name="ville" class="adress ele" placeholder="Ville">
 						<input type="tel" id="phone" name="phone" class="tel ele" placeholder="Numéro de téléphone" pattern="^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$" title="Doit contenir un numero de téléphone valide : 0606060606 ou +33606060606 ou 06-06-06-06-06">
-						<input type="text" name="username" class="login ele" placeholder="Pseudo" required pattern="^[a-zA-Z]{1,20}[0-9]{0,3}$">
-						<input type="password" class="password ele" name="password" placeholder="Mot de passe" required minlength=8 pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Doit contenir au moins un chiffre, une lettre en majuscule, des lettres en minuscule et doit contenir au moins 8 caractères">
-						<input type="password" class="password ele" name="repassword" placeholder="Confirmer le mot de passe" required minlength=8 pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Doit contenir au moins un chiffre, une lettre en majuscule, des lettres en minuscule et doit contenir au moins 8 caractères">
+						<input type="text" id="login" name="username" class="login ele" placeholder="Pseudo" required pattern="^[a-zA-Z]{1,20}[0-9]{0,3}$">
+						<input type="password" id="password" class="password ele" name="password" placeholder="Mot de passe" required minlength=8 pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Doit contenir au moins un chiffre, une lettre en majuscule, des lettres en minuscule et doit contenir au moins 8 caractères">
+						<input type="password" id="password" class="password ele" name="repassword" placeholder="Confirmer le mot de passe" required minlength=8 pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Doit contenir au moins un chiffre, une lettre en majuscule, des lettres en minuscule et doit contenir au moins 8 caractères">
 			
 						<button type="submit" name="btnRegist" class="clkbtn">Je m'inscris</button>
 					</div>
-					<?php
-						if(isset($_GET['erreur'])){
-							$err = $_GET['erreur'];
-							if($err==3){
-								echo "<p style='color:red'>Le pseudo a déjà été utilisé</p><style>.login{border-color:red;}</style>";
-							}
-							if($err==4){
-								echo "<p style='color:red'>Vous n'avez pas sasie le même mot de passe</p><style>.password {border-color:red;}</style>";
-							}
-						}
-					?>
 				</form>
 		<script src="../outils/login.js"></script>
 </body>

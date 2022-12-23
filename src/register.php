@@ -1,19 +1,6 @@
 <?php
     session_start();
 
-    function verifierAge($birth){
-        $aujourdhui = date("Y-m-d");
-        $diff = date_diff(date_create($birth), date_create($aujourdhui));
-        //echo 'Votre age est '.$diff->format('%y');
-        if($diff->format('%y') >= 18){
-            $rep = true;
-        }
-        else{
-            $rep = false;
-        }
-        return $rep;
-    }
-
     if(isset($_POST['username']) && (isset($_POST['password']))){
         //Connexion à la base de donées
         $db = 'Boissons';
