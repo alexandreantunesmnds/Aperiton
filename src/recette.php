@@ -8,6 +8,18 @@
     <link rel="stylesheet" href="../css/style.css" media="screen" type="text/css" />
     <link rel="icon" type="image/png" href="../outils/icon.png" />
     <script src="https://kit.fontawesome.com/1de3738fce.js" crossorigin="anonymous"></script>
+    <script>
+function sendAjaxRequest(url) {
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST', url);
+  xhr.send();
+
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState == 4 && xhr.status == 200) {
+      console.log(xhr.responseText);
+    }
+  }
+} </script>
 </head>
 
 <!-- L'entête -->
@@ -34,26 +46,43 @@
                 <h1><?php echo $recipe_title; ?></h1>
                 <div style="position : absolute; z-index : 2; right:10px;">
                 <button id="favorite" class="favorite" id="1"></button>
+                <script  type="text/javascript">
+$(document).ready(function() {
+  $('#favorite').click(function() {
+    // Envoi d'une requête AJAX au fichier addToFavorite.php
+    $.ajax({
+      url: 'addToFavorite.php', // URL de la page PHP qui exécute la fonction addToFavorite
+      type: 'POST', // Méthode de soumission des données
+      data: { liked: isLiked}, // Données à envoyer au serveur (vous pouvez ajouter ici des variables PHP en utilisant la notation JSON)
+      success: function(response) {
+        // Mettre à jour l'interface utilisateur en fonction de la réponse du serveur
+        if (response == "La recette a été ajoutée à vos favoris") {
+          console.log("La recette a été ajoutée aux favoris de l'utilisateur");
+          $('#favorite').addClass('liked');
+        } else if (response == "La recette a été supprimée de vos favoris") {
+          console.log("La recette a été supprimée des favoris de l'utilisateur");
+          $('#favorite').removeClass('liked');
+        }
+    }
+});
+});
+</script>
                     <script type="text/javascript">
-                        document.querySelector('.favorite').addEventListener('click', (e) => {
+                    // Initialisation de la variable isLiked
+                        var isLiked = false;
+                        document.querySelector('#favorite').addEventListener('click', (e) => {
                             e.currentTarget.classList.toggle('liked');
-                             
-                        });
+                            // Inversion de l'état de la variable isLiked
+                            isLiked = !isLiked;
+                            sendAjaxRequest('addToFavorite.php');
+                            });
+                            xhr.onreadystatechange = function () {
+}
                     </script>
                     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript">
 jQuery(document).ready(function($){
     $('.favorite').click(function(){
-        // Envoi d'une requête AJAX au fichier addToFavorite.php
-        $.ajax({
-            url: 'addToFavorite.php', // URL de la page PHP qui exécute la fonction addToFavorite
-            type: 'POST', // Méthode de soumission des données
-            data: {}, // Données à envoyer au serveur (vous pouvez ajouter ici des variables PHP en utilisant la notation JSON)
-            success: function(response){
-                // Mettre à jour l'interface utilisateur en fonction de la réponse du serveur
-            },
-            error: function(xhr, status, error){ // Fonction à exécuter en cas d'erreur de la requête
-                console.log(xhr.responseText); // Affiche les détails de l'erreur dans la console
-            }
+        
         });
     });
 
