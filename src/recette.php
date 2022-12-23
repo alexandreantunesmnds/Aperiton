@@ -56,11 +56,32 @@
             <div id="recipe_title" style="align-text:center; text-align: center; margin-top:10px; margin-bottom:10px; display:flex; position: relative; z-index:1;">
                 <h1><?php echo $recipe_title; ?></h1>
                 <div style="position : absolute; z-index : 2; right:10px;">
-                <button id="favorite" class="favorite"></button>
-                    <script>
+                <button id="favorite" class="favorite" id="1"></button>
+                    <script type="text/javascript">
                         document.querySelector('.favorite').addEventListener('click', (e) => {
                             e.currentTarget.classList.toggle('liked');
-                            cnx().ajax.phpPostSyn("recette.php", "addToFavorite");
+                             
+                        });
+                    </script>
+                    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript">
+                        jQuery(document).ready(function($){
+                        $('.favorite').click({
+                        blurCallback: function(){
+                            $('<div class="alert alert-info">').html('<?php echo "click"; ?>').appendTo('#consoleDebug').delay(6000).fadeOut();
+                                fetch("requete.php").then(function(){
+                                    console.log('Requête SQL exécutée avec succès');
+                                });
+                            },
+                            overCallback: function(element){
+                                // Mémorisation de l'id de l'iframe survollée
+                                this._overId = $(element).parents('.favorite').attr('id');
+                            },
+                            outCallback: function(element){
+                                // Reset lorsque la souris sort de l'iframe et revient dans la fenêtre
+                                this._overId = null;
+                            },
+                                _overId: null
+                            });
                         });
                     </script>
                 </div>
