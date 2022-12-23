@@ -64,25 +64,39 @@
                         });
                     </script>
                     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript">
-                        jQuery(document).ready(function($){
-                        $('.favorite').click({
-                        blurCallback: function(){
-                            $('<div class="alert alert-info">').html('<?php echo "click"; ?>').appendTo('#consoleDebug').delay(6000).fadeOut();
-                                fetch("requete.php").then(function(){
-                                    console.log('Requête SQL exécutée avec succès');
-                                });
-                            },
-                            overCallback: function(element){
-                                // Mémorisation de l'id de l'iframe survollée
-                                this._overId = $(element).parents('.favorite').attr('id');
-                            },
-                            outCallback: function(element){
-                                // Reset lorsque la souris sort de l'iframe et revient dans la fenêtre
-                                this._overId = null;
-                            },
-                                _overId: null
-                            });
-                        });
+jQuery(document).ready(function($){
+    $('.favorite').click(function(){
+        // Envoi d'une requête AJAX au fichier addToFavorite.php
+        $.ajax({
+            url: 'addToFavorite.php', // URL de la page PHP qui exécute la fonction addToFavorite
+            type: 'POST', // Méthode de soumission des données
+            data: {}, // Données à envoyer au serveur (vous pouvez ajouter ici des variables PHP en utilisant la notation JSON)
+            success: function(response){
+                // Mettre à jour l'interface utilisateur en fonction de la réponse du serveur
+            },
+            error: function(xhr, status, error){ // Fonction à exécuter en cas d'erreur de la requête
+                console.log(xhr.responseText); // Affiche les détails de l'erreur dans la console
+            }
+        });
+    });
+
+    // Fonctions de gestion des événements blur, over et out
+    function blurCallback() {
+        $('<div class="alert alert-info">').html('<?php echo "click"; ?>').appendTo('#consoleDebug').delay(6000).fadeOut();
+        fetch("requete.php").then(function(){
+            console.log('Requête SQL exécutée avec succès');
+        });
+    }
+    function overCallback(element) {
+        // Mémorisation de l'id de l'iframe survollée
+        this._overId = $(element).parents('.favorite').attr('id');
+    }
+    function outCallback(element) {
+        // Reset lorsque la souris sort de l'iframe et revient dans la fenêtre
+        this._overId = null;
+    }
+    var _overId = null;
+});
                     </script>
                 </div>
             </div>
