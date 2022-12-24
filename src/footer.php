@@ -1,3 +1,4 @@
-<footer id="footer">
-    <p>Ce site a été crée dans le cadre d'un projet en binôme.</p>
+<footer class="footer">
+    <p>Ce site a été crée dans le cadre d'un projet en binôme encadré par <a href="https://members.loria.fr/HDPNgo/">Mme Ngo.</a> et <a href="https://www.researchgate.net/scientific-contributions/Lotfi-Bellalem-19493385">Mr Bellalem</a></p>
+    <p>Les différentes recettes et une partie des photos nous ont été fournis par nos professeurs. Le reste des photos proviennent de divers site telle que <a style="font-weight:bold;"href="https://www.marmiton.org/">marmiton</a>, <a href="https://www.1001cocktails.com/">1001cocktail</a>, <a href="https://www.cuisineaz.com/">cuisineAZ</a>...</p>
 </footer>

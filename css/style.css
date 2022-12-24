@@ -12,7 +12,10 @@
 
 /* PAGE PRINCIPALE */
 main{
-	padding : 10px;
+	margin-left: 10px;
+	margin-right: 10px;
+	margin-top:40px;
+	margin-bottom: 40px;
 	width: 100% auto;
 	display: flex;
 }
@@ -126,6 +129,16 @@ footer{
 	background: rgb(240, 240, 240);
 }
 
+footer p{
+	font-size: 15px;
+	margin: 0;
+    padding: 0;
+}
+
+footer a{
+	font-weight: bold;
+}
+
 input[type=text]{
 	width: 100%;
 	padding: 12px 20px;
@@ -199,7 +212,6 @@ input[type=text]{
     border: 2px solid #F58549;
     width: 30% ;
     border-radius: 10px;
-    margin : 10px;
     padding: 4px;
     height : 400px;
     font-size: 15px;

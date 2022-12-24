@@ -255,8 +255,8 @@
     </div>
     <!-- La barre de navigation horizontale -->
     <nav id="toolbar">
-        <span><a href="recherche.php?search_recipe=tout">Toutes nos recettes</a></span>
-        <span><a href="page2.html">Les recettes par catégories</a></span>
+        <div><a href="recherche.php?search_recipe=tout">Toutes nos recettes</a></div>
+        <div><a href="page2.html">Les recettes par catégories</a></div>
         <!-- On récupère une recette aléatoire -->
         <?php 
         /* Connexion à la base de données */
@@ -274,7 +274,9 @@
         $exec_requete = mysqli_query($mysqli,$requete);
         $reponse = mysqli_fetch_array($exec_requete);
         ?>
-        <span><a href="recette.php?nom=<?php echo $reponse['nom']; ?>">Recette au hasard</a></span>
+        <div><a href="recette.php?nom=<?php echo $reponse['nom']; ?>">Recette au hasard</a></div>
+        <div><a href="https://solidarites-sante.gouv.fr/prevention-en-sante/addictions/article/l-addiction-a-l-alcool">Mieux consommer</a></div>
+
     </nav>
 
 </header>
