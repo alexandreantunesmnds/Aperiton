@@ -100,7 +100,7 @@
                     </a>
                 </div>
             </main>
-        </div>  
+        </div> 
     </div>
 </body>
 <!-- Le pied de page -->
