@@ -45,7 +45,6 @@ function sendAjaxRequest(url) {
                // Récupération de l'ID de la recette
                $recipe_id = $result['id_recette'];
            }
-   
            if (isset($_SESSION['username'])) {
              $username = $_SESSION['username']; // ID de l'utilisateur connecté
 
@@ -62,6 +61,9 @@ function sendAjaxRequest(url) {
              $result = mysqli_query($mysqli, $sql);
              $result = mysqli_fetch_array($result);
            }
+           else{
+            $result['count']=0;
+       }
     ?>
     <span id="ariane">
         <a href="aperiton.php">Accueil</a> > recettes > <a href="#"><?php echo $recipe_title; ?></a>
@@ -71,7 +73,14 @@ function sendAjaxRequest(url) {
             <div id="recipe_title" style="align-text:center; text-align: center; margin-top:10px; margin-bottom:10px; display:flex; position: relative; z-index:1;">
                 <h1><?php echo $recipe_title; ?></h1>
                 <div style="position : absolute; z-index : 2; right:10px;">
+                <?php  if (isset($_SESSION['username'])) {?>
                 <button id="favorite" class="favorite <?php if ($result['count'] == 1) echo 'liked'; ?>" id="1"></button>
+                <?php }
+                else{
+                    ?>
+                <button id="favorite" class="favorite" disabled id="1"></button>
+                <?php   echo '<p  class="message-favoris">Vous devez être connecté pour ajouter cette recette à vos favoris</p>';}?>
+ 
                     <script type="text/javascript">
                         // Initialisation de la variable isLiked
                         var isLiked = <?php if ($result['count'] == 1) echo 'true'; else echo 'false';?>;
@@ -121,7 +130,6 @@ jQuery(document).ready(function($){
         this._overId = null;
     }
     var _overId = null;
-});
                     </script>
                 </div>
             </div>

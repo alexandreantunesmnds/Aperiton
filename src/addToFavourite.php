@@ -53,4 +53,6 @@ if ($count[0] == 0) {
 } else {
 // L'utilisateur n'est pas connecté, on affiche un message d'erreur
 echo "Erreur : vous devez être connecté pour ajouter une recette à vos favoris";
+
+}?>
 }

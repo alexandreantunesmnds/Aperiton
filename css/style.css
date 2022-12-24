@@ -67,6 +67,20 @@ main{
 	transition: transform 0.5s ease-out;
 }
 
+/* Ajout de la règle CSS pour le message */
+.message-favoris {
+	/* Changement de la couleur de texte */
+	color: red;
+	/* Centrage du texte */
+	text-align: center;
+	/* Mise en gras du texte */
+	font-weight: bold;
+	/* Augmentation de la taille de police */
+	font-size: 18px;
+	/* Ajout d'une marge en haut et en bas */
+	margin: 80px 0;
+  }
+
 .card:hover .info, .card:hover .info:before {
 	transform: translateY(0) translateZ(0);
 }
