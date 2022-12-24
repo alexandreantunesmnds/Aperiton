@@ -36,7 +36,7 @@
     <span id="ariane">
         <a href="aperiton.php">Accueil</a> > recettes </a>
     </span>
-    <div class="search_recipes">
+    <div class="search_recipes" style="min-height:500px;">
         <h1 style="font-size: 50px;">Résultats pour : 
             <?php
             if(isset($_GET['search_recipe']) && !empty($_GET['search_recipe'])){

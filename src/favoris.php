@@ -18,7 +18,7 @@
 <span id="ariane">
         <a href="aperiton.php">Accueil</a> > recettes </a>
     </span>
-    <div class="search_recipes">
+    <div class="search_recipes" style="min-height:500px;">
         <h1 style="font-size: 50px;">Mes favoris : </h1>
         <?php
             /* Requête permettant de récupérer les recettes mis en favoris par un utilisateur */
