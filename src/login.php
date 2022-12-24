@@ -1,4 +1,6 @@
 <?php
+    session_start();
+
     if(isset($_POST['username']) && (isset($_POST['password']))){
         //Connexion à la base de donées
         $db = 'Boissons';
