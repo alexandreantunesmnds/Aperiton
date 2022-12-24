@@ -53,6 +53,16 @@
                             <input id="input" type="password" class="password" name="password" placeholder="Nouveau mot de passe" minlength=8 pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Doit contenir au moins un chiffre, une lettre en majuscule, des lettres en minuscule et doit contenir au moins 8 caractères">
                             <input id="input" type="password" class="password" name="repassword" placeholder="Confirmer nouveau mot de passe" minlength=8 pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Doit contenir au moins un chiffre, une lettre en majuscule, des lettres en minuscule et doit contenir au moins 8 caractères">
                         </p>
+                        <?php if(isset($_GET['erreur'])){
+                                $err = $_GET['erreur'];
+
+                                if($err==1){
+                                    echo "<p style='color:red'>Les mots de passe saisies sont différents</p>";
+                                }else if($err == 2){
+                                    echo "<p style='color:red'>Mot de passe incorrect</p>";
+                                }
+                            }
+                        ?>
                     </div>
                     <div class="mesCoordonnees">
                         <h2>Mes coordonnées :</h2>
