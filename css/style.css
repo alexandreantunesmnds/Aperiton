@@ -334,3 +334,8 @@ img {
 	border: none;
 	cursor: pointer;
 }
+
+/* PAGE RECHERCHE PAR CAT */
+.super_cats{
+	display:flex;
+}

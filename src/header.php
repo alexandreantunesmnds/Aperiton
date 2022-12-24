@@ -256,7 +256,7 @@
     <!-- La barre de navigation horizontale -->
     <nav id="toolbar">
         <div><a href="recherche.php?search_recipe=tout">Toutes nos recettes</a></div>
-        <div><a href="page2.html">Les recettes par catégories</a></div>
+        <div><a href="rechercheParCateg.php">Les recettes par catégories</a></div>
         <!-- On récupère une recette aléatoire -->
         <?php 
         /* Connexion à la base de données */

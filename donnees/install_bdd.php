@@ -183,8 +183,7 @@
          mysqli_real_escape_string($mysqli,$nom_photo));
          echo $requet."</br></br>";
          $Sql = $Sql.$requet;
-      }
-
+         
          //On associe les aliments à la recette
          if(array_key_exists("index", $liste_recettes)){
             foreach($liste_recettes['index'] as $liste_aliments){
@@ -195,6 +194,7 @@
                $Sql = $Sql.$requet;
             }
          }
+      }
 		
    //Ici je supprime le dernier ;
 	$Sql = substr($Sql,0,-1);	
