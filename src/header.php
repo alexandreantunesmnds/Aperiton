@@ -19,7 +19,9 @@
 
     <div id="top">
     <div id="top_left">
-     
+        <?php if(isset($_SESSION['username'])):?>
+                <button onclick="window.location.href = 'profil.php';"><i class="fas fa-user" style='color:white;'></i>  <?php echo $_SESSION['username']?></button>
+        <?php endif; ?>
     </div>
 
         <!-- Barre de recherche -->
@@ -239,9 +241,6 @@
                     </button>   
                     <button onclick="window.location.href = 'aperiton.php?deconnexion=true';">
                         Deconnexion
-                    </button>
-                    <button onclick="window.location.href = 'profil.php';" style="width:20px;background-color: transparent;border-color: transparent;">
-                        <i class="fa-solid fa-user" style="color:#F58549;"></i>
                     </button>
             <!-- Le cas où l'utilisateur est inconnu -->
             <?php else: ?>

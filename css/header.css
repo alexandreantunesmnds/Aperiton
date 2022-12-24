@@ -17,9 +17,25 @@ header #top{
 }
 
 header #top_left{
-  position: absolute;
   top: 0;
   left: 0;
+  width:20%;
+}
+
+header #top_left button{
+  background: #F58549;
+  color: white;
+  border: solid #F58549;
+  border-radius: 10px;
+  height: 30px;
+  width: 150px;
+}
+
+header #top_left button:hover{
+  background: white;
+  color: #F58549;
+  border: solid #F58549;
+  border-radius: 10px;
 }
 
 header #top_center{
@@ -86,6 +102,7 @@ header #top_right{
   display: inline-block;
   text-align: center;
   vertical-align: top;
+  width: 30%;
 }
 
 header #top_right button{

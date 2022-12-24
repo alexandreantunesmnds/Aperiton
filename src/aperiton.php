@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 
 <head>
-        <title>Aperiton - Page d'accueil</title>
-	    <meta charset="utf-8" />
-        <!-- Importation du fichier style css -->
-        <link rel="stylesheet" href="../css/style.css" media="screen" type="text/css" />
-        <link rel="icon" type="image/png" href="../outils/icon.png" />
-        <link rel="stylesheet" href="path/to/font-awesome.css">
+    <title>Aperiton - Page d'accueil</title>
+    <meta charset="utf-8" />
+    <!-- Importation du fichier style css -->
+    <link rel="stylesheet" href="../css/style.css" media="screen" type="text/css" />
+    <link rel="icon" type="image/png" href="../outils/icon.png" />
+    <link rel="stylesheet" href="path/to/font-awesome.css">
 </head>
 
 <!-- L'entête -->
