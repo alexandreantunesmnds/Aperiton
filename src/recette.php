@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../css/style.css" media="screen" type="text/css" />
     <link rel="icon" type="image/png" href="../outils/icon.png" />
     <script src="https://kit.fontawesome.com/1de3738fce.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
 function sendAjaxRequest(url) {
   var xhr = new XMLHttpRequest();
@@ -23,19 +24,44 @@ function sendAjaxRequest(url) {
 </head>
 
 <!-- L'entête -->
-<?php include_once('header.php');   include_once('addToFavourite.php'); ?>
+<?php include_once('header.php'); ?>
 <body>
    <?php
-        $mysqli=mysqli_connect('localhost', 'root', '','Boissons') or die("Erreur de connexion");
+           $mysqli=mysqli_connect('localhost', 'root', '','Boissons') or die("Erreur de connexion");
         
-        if(isset($_GET['nom'])){ 
-            $recipe_title = $_GET['nom'];
+           if(isset($_GET['nom'])){ 
+               $recipe_title = $_GET['nom'];
+   
+               /* On recherche la recette dans la bdd */
+               $requete = "SELECT id_recette, ingredients, preparation,photo FROM recettes WHERE nom = '$recipe_title'";
+               $exec_requete = mysqli_query($mysqli,$requete);
+               $reponse = mysqli_fetch_array($exec_requete);
+   
+                 // Sélection de l'ID de la recette avec le nom correspondant
+               $sql = "SELECT id_recette FROM recettes WHERE nom = '$recipe_title'";
+               $result = mysqli_query($mysqli, $sql);
+               $result = mysqli_fetch_array($result);
+   
+               // Récupération de l'ID de la recette
+               $recipe_id = $result['id_recette'];
+           }
+   
+           if (isset($_SESSION['username'])) {
+             $username = $_SESSION['username']; // ID de l'utilisateur connecté
 
-            /* On recherche la recette dans la bdd */
-            $requete = "SELECT id_recette, ingredients, preparation,photo FROM recettes WHERE nom = '$recipe_title'";
-            $exec_requete = mysqli_query($mysqli,$requete);
-            $reponse = mysqli_fetch_array($exec_requete);
-        }
+            // Sélection de l'ID de l'utilisateur avec le nom correspondant
+            $sql = "SELECT id_utilisateur FROM utilisateur WHERE pseudo = '$username'";
+            $result = mysqli_query($mysqli, $sql);
+            $result = mysqli_fetch_array($result);
+
+            // Récupération de l'ID de l'utilisateur
+            $user_id = $result['id_utilisateur'];
+   
+             // On vérifie si l'utilisateur a déjà mis la recette en favoris
+             $sql = "SELECT COUNT(*) as count FROM favoris WHERE id_utilisateur = '$user_id' AND id_recette = '$recipe_id'";
+             $result = mysqli_query($mysqli, $sql);
+             $result = mysqli_fetch_array($result);
+           }
     ?>
     <span id="ariane">
         <a href="aperiton.php">Accueil</a> > recettes > <a href="#"><?php echo $recipe_title; ?></a>
@@ -45,39 +71,32 @@ function sendAjaxRequest(url) {
             <div id="recipe_title" style="align-text:center; text-align: center; margin-top:10px; margin-bottom:10px; display:flex; position: relative; z-index:1;">
                 <h1><?php echo $recipe_title; ?></h1>
                 <div style="position : absolute; z-index : 2; right:10px;">
-                <button id="favorite" class="favorite" id="1"></button>
-                <script  type="text/javascript">
-$(document).ready(function() {
-  $('#favorite').click(function() {
-    // Envoi d'une requête AJAX au fichier addToFavorite.php
-    $.ajax({
-      url: 'addToFavorite.php', // URL de la page PHP qui exécute la fonction addToFavorite
-      type: 'POST', // Méthode de soumission des données
-      data: { liked: isLiked}, // Données à envoyer au serveur (vous pouvez ajouter ici des variables PHP en utilisant la notation JSON)
-      success: function(response) {
-        // Mettre à jour l'interface utilisateur en fonction de la réponse du serveur
-        if (response == "La recette a été ajoutée à vos favoris") {
-          console.log("La recette a été ajoutée aux favoris de l'utilisateur");
-          $('#favorite').addClass('liked');
-        } else if (response == "La recette a été supprimée de vos favoris") {
-          console.log("La recette a été supprimée des favoris de l'utilisateur");
-          $('#favorite').removeClass('liked');
-        }
-    }
-});
-});
-</script>
+                <button id="favorite" class="favorite <?php if ($result['count'] == 1) echo 'liked'; ?>" id="1"></button>
                     <script type="text/javascript">
-                    // Initialisation de la variable isLiked
-                        var isLiked = false;
-                        document.querySelector('#favorite').addEventListener('click', (e) => {
-                            e.currentTarget.classList.toggle('liked');
-                            // Inversion de l'état de la variable isLiked
-                            isLiked = !isLiked;
-                            sendAjaxRequest('addToFavorite.php');
-                            });
-                            xhr.onreadystatechange = function () {
-}
+                        // Initialisation de la variable isLiked
+                        var isLiked = <?php if ($result['count'] == 1) echo 'true'; else echo 'false';?>;
+
+// Ajout d'un écouteur d'événement click sur le bouton
+document.getElementById('favorite').addEventListener('click', (e) => {
+  // Inversion de la valeur de isLiked
+  isLiked = !isLiked;
+  e.currentTarget.classList.toggle('liked');
+
+  // Envoi d'une requête AJAX au fichier addToFavorite.php ou removeToFavorite.php en fonction de la valeur de isLiked
+  $.ajax({
+    url: isLiked ? 'addToFavourite.php' : 'removeToFavourite.php',
+    type: 'POST',
+    data: { liked: isLiked,  nom: <?php echo json_encode($recipe_title); ?> },
+    success: function(response) {
+      console.log(response);
+      // Mettre à jour l'interface utilisateur en fonction de la réponse du serveur
+    },
+    error: function(xhr, status, error) {
+      console.error(error);
+      // Afficher un message d'erreur à l'utilisateur
+    }
+  });
+});
                     </script>
                     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript">
 jQuery(document).ready(function($){

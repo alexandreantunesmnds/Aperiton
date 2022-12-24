@@ -120,9 +120,6 @@
 
 						<input type="password" class="password ele" name="repassword" placeholder="Confirmer le mot de passe" required minlength=8 pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Doit contenir au moins un chiffre, une lettre en majuscule, des lettres en minuscule et doit contenir au moins 8 caractères">
 
-			
-
-717273747576777879808182838485868788899091
 						<button type="submit" name="btnRegist" class="clkbtn">Je m'inscris</button>
 					</div>
 					<?php
