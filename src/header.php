@@ -1,6 +1,4 @@
-<?php 
-    session_start();
-
+<?php
     if(isset($_GET['deconnexion'])){ 
         if($_GET['deconnexion']==true){ 
             session_unset();
