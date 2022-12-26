@@ -1,6 +1,4 @@
-<?php 
-    session_start();
-?>
+<?php include_once('header.php'); ?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -13,16 +11,18 @@
     <link rel="stylesheet" href="path/to/font-awesome.css">
 </head>
 
-<!-- L'entête -->
-<?php include_once('header.php'); ?>
-
 <body>
     <!-- Le corps de page -->
     <div id="body" >
         <div id="random_recipe">
             <?php
-                /* Connexion à la base de données */
-                $mysqli=mysqli_connect('localhost', 'root', '','Boissons') or die("Erreur de connexion");
+                                                                    $host = 'localhost';
+            $user = 'id20059208_boissons';
+            $password = 'bLEr~9qr(I]\awtD'; // remplacez ce mot de passe par celui de votre base de données
+            $database = 'id20059208_boisson';
+            
+            // Création de la connexion
+            $mysqli = mysqli_connect($host, $user, $password, $database);
 
                 $requete = "SELECT count(*) FROM recettes";
                 $exec_requete = mysqli_query($mysqli,$requete);

@@ -1,11 +1,14 @@
 <?php
+    session_start();
     if(isset($_GET['deconnexion'])){ 
         if($_GET['deconnexion']==true){ 
             session_unset();
             session_destroy();
             header('Location: aperiton.php');
         }
+                echo 'heyyyyyyyyyyyyy username:'.$_SESSION['username'];
     }
+
 ?>
 <header>
     <!-- Importation du fichier style css -->
@@ -257,8 +260,13 @@
         <div><a href="rechercheParCateg.php">Les recettes par catégories</a></div>
         <!-- On récupère une recette aléatoire -->
         <?php 
-        /* Connexion à la base de données */
-        $mysqli=mysqli_connect('localhost', 'root', '','Boissons') or die("Erreur de connexion");
+        $host = 'localhost';
+            $user = 'id20059208_boissons';
+            $password = 'bLEr~9qr(I]\awtD'; // remplacez ce mot de passe par celui de votre base de données
+            $database = 'id20059208_boisson';
+            
+            // Création de la connexion
+            $mysqli = mysqli_connect($host, $user, $password, $database);
 
         $requete = "SELECT count(*) FROM recettes";
         $exec_requete = mysqli_query($mysqli,$requete);

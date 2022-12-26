@@ -1,9 +1,14 @@
-
+<?php include_once('header.php'); ?>
 <?php
 
 
-// Connexion à la base de données
-$mysqli = mysqli_connect('localhost', 'root', '', 'Boissons') or die("Erreur de connexion");
+                            $host = 'localhost';
+            $user = 'id20059208_boissons';
+            $password = 'bLEr~9qr(I]\awtD'; // remplacez ce mot de passe par celui de votre base de données
+            $database = 'id20059208_boisson';
+            
+            // Création de la connexion
+            $mysqli = mysqli_connect($host, $user, $password, $database);
 
 if (isset($_POST['nom'])) {
     $recipe_title = $_POST['nom'];
@@ -19,8 +24,9 @@ if (isset($_POST['nom'])) {
     die("Erreur : aucun nom de recette n'a été fourni");
   }
 
-session_start();
+//session_start();
 // Vérification si l'utilisateur est connecté
+print_r($_SESSION);
 if (isset($_SESSION['username'])) {
     // Récupération de l'ID de l'utilisateur
     $requete = "SELECT id_utilisateur FROM utilisateur WHERE pseudo = ?";

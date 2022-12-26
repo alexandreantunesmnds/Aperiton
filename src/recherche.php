@@ -1,3 +1,4 @@
+<?php include_once('header.php'); ?>
 <!DOCTYPE html>
 <html>
 
@@ -9,13 +10,14 @@
         <link rel="icon" type="image/png" href="../outils/icon.png" />
 </head>
 
-<!-- L'entête -->
-<?php include_once('header.php'); ?>
-
 <?php
- /* Requête permettant la recherche de recette à partir de mots clefs (ingrédients ou nom) */
-    /* Code à potentiellement déplacé */
-    $mysqli=mysqli_connect('localhost', 'root', '','Boissons') or die("Erreur de connexion");
+                            $host = 'localhost';
+            $user = 'id20059208_boissons';
+            $password = 'bLEr~9qr(I]\awtD'; // remplacez ce mot de passe par celui de votre base de données
+            $database = 'id20059208_boisson';
+            
+            // Création de la connexion
+            $mysqli = mysqli_connect($host, $user, $password, $database);
     $requete = "SELECT * FROM recettes ORDER BY id_recette DESC";
     $all_recipe = mysqli_query($mysqli,$requete);
 

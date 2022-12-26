@@ -1,3 +1,12 @@
+<?php include_once('header.php'); ?>
+<?php
+// Vérifiez si l'utilisateur est connecté
+if (!isset($_SESSION['username'])) {
+    // Si l'utilisateur n'est pas connecté, redirigez-le vers la page de connexion
+    header('Location: connexion.php');
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html>
 
@@ -10,16 +19,19 @@
     <script src="https://kit.fontawesome.com/1de3738fce.js" crossorigin="anonymous"></script>
 </head>
 
-
-<!-- L'entête -->
-<?php include_once('header.php'); ?>
-
 <?php if(isset($_SESSION['username'])): ?>
     <body>
         <span id="ariane">
             <a href="aperiton.php">Accueil</a> > profil
             <div class="monProfil">
-                <?php $mysqli=mysqli_connect('localhost', 'root', '','Boissons') or die("Erreur de connexion");
+                <?php
+                            $host = 'localhost';
+            $user = 'id20059208_boissons';
+            $password = 'bLEr~9qr(I]\awtD'; // remplacez ce mot de passe par celui de votre base de données
+            $database = 'id20059208_boisson';
+            
+            // Création de la connexion
+            $mysqli = mysqli_connect($host, $user, $password, $database);
                     $requete = "SELECT * FROM utilisateur WHERE pseudo LIKE '".$_SESSION['username']."'";
                     $all_users = mysqli_query($mysqli,$requete);
                     $user = mysqli_fetch_array($all_users);
@@ -79,8 +91,6 @@
             </div>
         </span>
     </body>
-<?php else: ?>
-    <?php header('Location: connexion.php');?>
 <?php endif; ?>
 
 <!-- Le pied de page -->

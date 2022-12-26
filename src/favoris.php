@@ -1,3 +1,4 @@
+<?php include_once('header.php'); ?>
 <!DOCTYPE html>
 <html>
 
@@ -9,9 +10,6 @@
     <link rel="icon" type="image/png" href="../outils/icon.png" />
 </head>
 
-<!-- L'entête -->
-<?php include_once('header.php'); ?>
-
 <?php if(isset($_SESSION['username'])): ?>
 <!-- Corps de page -->
 <body>
@@ -21,15 +19,20 @@
     <div class="search_recipes" style="min-height:500px;">
         <h1 style="font-size: 50px;">Mes favoris : </h1>
         <?php
-            /* Requête permettant de récupérer les recettes mis en favoris par un utilisateur */
-            $mysqli=mysqli_connect('localhost', 'root', '','Boissons') or die("Erreur de connexion");
+                                    $host = 'localhost';
+            $user = 'id20059208_boissons';
+            $password = 'bLEr~9qr(I]\awtD'; // remplacez ce mot de passe par celui de votre base de données
+            $database = 'id20059208_boisson';
+            
+            // Création de la connexion
+            $mysqli = mysqli_connect($host, $user, $password, $database);
             $requete = "SELECT id_utilisateur FROM utilisateur WHERE pseudo LIKE '".$_SESSION['username']."'";
             $all_users = mysqli_query($mysqli,$requete); //On récupère l'id de l'utilisateur
             if( mysqli_num_rows($all_users)  > 0){
                 $user = mysqli_fetch_array($all_users);
 
                 //Puis ses recettes favoris
-                $requete = "SELECT r.nom, r.photo,r.ingredients FROM recettes r, favoris f, utilisateur u WHERE r.id_recette = f.id_recette AND u.id_utilisateur = f.id_utilisateur";
+                $requete = "SELECT r.nom, r.photo, r.ingredients FROM recettes r, favoris f, utilisateur u WHERE r.id_recette = f.id_recette AND u.id_utilisateur = f.id_utilisateur AND u.id_utilisateur = " . $user['id_utilisateur'];
                 $all_recipe = mysqli_query($mysqli,$requete);
 
                 if( mysqli_num_rows($all_recipe)  > 0){

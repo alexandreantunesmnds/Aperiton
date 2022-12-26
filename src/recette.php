@@ -1,3 +1,4 @@
+<?php include_once('header.php'); ?>
 <!DOCTYPE html>
 <html>
 
@@ -23,11 +24,15 @@ function sendAjaxRequest(url) {
 } </script>
 </head>
 
-<!-- L'entête -->
-<?php include_once('header.php'); ?>
 <body>
    <?php
-           $mysqli=mysqli_connect('localhost', 'root', '','Boissons') or die("Erreur de connexion");
+                                       $host = 'localhost';
+            $user = 'id20059208_boissons';
+            $password = 'bLEr~9qr(I]\awtD'; // remplacez ce mot de passe par celui de votre base de données
+            $database = 'id20059208_boisson';
+            
+            // Création de la connexion
+            $mysqli = mysqli_connect($host, $user, $password, $database);
         
            if(isset($_GET['nom'])){ 
                $recipe_title = $_GET['nom'];
