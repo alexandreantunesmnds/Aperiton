@@ -11,13 +11,7 @@
 </head>
 
 <?php
-                            $host = 'localhost';
-            $user = 'id20059208_boissons';
-            $password = 'bLEr~9qr(I]\awtD'; // remplacez ce mot de passe par celui de votre base de données
-            $database = 'id20059208_boisson';
-            
-            // Création de la connexion
-            $mysqli = mysqli_connect($host, $user, $password, $database);
+$mysqli=mysqli_connect('localhost', 'root', '','Boissons') or die("Erreur de connexion");
     $requete = "SELECT * FROM recettes ORDER BY id_recette DESC";
     $all_recipe = mysqli_query($mysqli,$requete);
 

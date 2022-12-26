@@ -19,13 +19,7 @@
     <div class="search_recipes" style="min-height:500px;">
         <h1 style="font-size: 50px;">Mes favoris : </h1>
         <?php
-                                    $host = 'localhost';
-            $user = 'id20059208_boissons';
-            $password = 'bLEr~9qr(I]\awtD'; // remplacez ce mot de passe par celui de votre base de données
-            $database = 'id20059208_boisson';
-            
-            // Création de la connexion
-            $mysqli = mysqli_connect($host, $user, $password, $database);
+        $mysqli=mysqli_connect('localhost', 'root', '','Boissons') or die("Erreur de connexion");
             $requete = "SELECT id_utilisateur FROM utilisateur WHERE pseudo LIKE '".$_SESSION['username']."'";
             $all_users = mysqli_query($mysqli,$requete); //On récupère l'id de l'utilisateur
             if( mysqli_num_rows($all_users)  > 0){
