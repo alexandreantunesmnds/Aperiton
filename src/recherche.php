@@ -18,7 +18,13 @@ $mysqli=mysqli_connect('localhost', 'root', '','Boissons') or die("Erreur de con
     if(isset($_GET['search_recipe']) && !empty($_GET['search_recipe'])){
         if(strcmp($_GET['search_recipe'],"tout") != 0){
             $recherche = htmlspecialchars($_GET['search_recipe']);
-            $requete = "SELECT * FROM recettes WHERE nom LIKE '%$recherche%' OR ingredients LIKE '%$recherche%' ORDER BY id_recette DESC";
+            // Exclure les recettes contenant un ingrédient spécifique (commençant par "pas de")
+            if (preg_match('/^pas de\s(.+)/', $recherche, $matches)) {
+                $ingredient_a_eviter = $matches[1];
+                $requete = "SELECT * FROM recettes WHERE ingredients NOT LIKE '%$ingredient_a_eviter%' ORDER BY id_recette DESC";
+            } else {
+                $requete = "SELECT * FROM recettes WHERE nom LIKE '%$recherche%' OR ingredients LIKE '%$recherche%' ORDER BY id_recette DESC";
+            }
             $all_recipe = mysqli_query($mysqli,$requete);
         }else{
             $recherche = htmlspecialchars($_GET['search_recipe']);
@@ -60,7 +66,7 @@ $mysqli=mysqli_connect('localhost', 'root', '','Boissons') or die("Erreur de con
                         echo $div;
                     }
                 }else{
-                    echo "Aucune recette trouvé";
+                    echo "Aucune recette trouvée";
                 }
             }
         ?>
